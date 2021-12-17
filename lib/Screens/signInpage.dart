@@ -51,14 +51,18 @@ class SignIn extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              Rigister(press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RigisterPage(),
-                  ),
-                );
-              }),
+              Rigister(
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RigisterPage(),
+                    ),
+                  );
+                },
+                accountext: 'Don\'t have an Account?',
+                text: 'Register',
+              ),
             ],
           ),
         ),

@@ -41,7 +41,7 @@ class WelcomePage extends StatelessWidget {
                     height: 18,
                   ),
                   const Text(
-                    'Welcome to Expiry Cart.\n For Fan & Easy Shopping',
+                    'Welcome to Expiry Cart.\n For Fun & Easy Shopping',
                     style: kWelcomeText,
                     textAlign: TextAlign.center,
                   ),
