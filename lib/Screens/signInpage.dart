@@ -1,11 +1,11 @@
 // ignore_for_file: file_names
 
-import 'package:expiry_cart/Screens/rigisterPage.dart';
+import 'package:expiry_cart/Screens/registerPage.dart';
 import 'package:expiry_cart/Style/appIcon.dart';
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:expiry_cart/Style/inputField.dart';
 import 'package:expiry_cart/Style/passwordField.dart';
-import 'package:expiry_cart/Style/rigister.dart';
+import 'package:expiry_cart/Style/register.dart';
 import 'package:expiry_cart/Style/textButtonStyle.dart';
 import 'package:flutter/material.dart';
 
@@ -51,12 +51,12 @@ class SignIn extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              Rigister(
+              Register(
                 press: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => RigisterPage(),
+                      builder: (context) => RegisterPage(),
                     ),
                   );
                 },

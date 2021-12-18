@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class EmailStyle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RigisterField(
+    return RegisterField(
       child: const TextField(
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
@@ -31,7 +31,7 @@ class EmailStyle extends StatelessWidget {
 class UserNameStyle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RigisterField(
+    return RegisterField(
       child: const TextField(
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
@@ -53,10 +53,10 @@ class UserNameStyle extends StatelessWidget {
   }
 }
 
-class RigisterField extends StatelessWidget {
+class RegisterField extends StatelessWidget {
   final Widget child;
 
-  RigisterField({@required this.child});
+  RegisterField({@required this.child});
   @override
   Widget build(BuildContext context) {
     return Container(

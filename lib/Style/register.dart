@@ -1,11 +1,11 @@
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:flutter/material.dart';
 
-class Rigister extends StatelessWidget {
+class Register extends StatelessWidget {
   final String accountext;
   final String text;
   final Function press;
-  Rigister({
+  Register({
     @required this.press,
     @required this.accountext,
     @required this.text,

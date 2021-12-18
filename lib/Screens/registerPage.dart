@@ -3,17 +3,17 @@
 import 'package:expiry_cart/Screens/signInpage.dart';
 import 'package:expiry_cart/Style/appIcon.dart';
 import 'package:expiry_cart/Style/constant.dart';
-import 'package:expiry_cart/Style/rigister.dart';
-import 'package:expiry_cart/Style/rigisterStyle.dart';
+import 'package:expiry_cart/Style/register.dart';
+import 'package:expiry_cart/Style/registerStyle.dart';
 import 'package:expiry_cart/Style/textButtonStyle.dart';
 import 'package:flutter/material.dart';
 
-class RigisterPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _RigisterPageState createState() => _RigisterPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _RigisterPageState extends State<RigisterPage> {
+class _RegisterPageState extends State<RegisterPage> {
   bool visibilty = true;
   bool confi_visibilty = true;
   @override
@@ -39,7 +39,7 @@ class _RigisterPageState extends State<RigisterPage> {
               const SizedBox(
                 height: 15,
               ),
-              RigisterField(
+              RegisterField(
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "Password",
@@ -72,7 +72,7 @@ class _RigisterPageState extends State<RigisterPage> {
               const SizedBox(
                 height: 15,
               ),
-              RigisterField(
+              RegisterField(
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "Re-Enter Password",
@@ -114,7 +114,7 @@ class _RigisterPageState extends State<RigisterPage> {
               const SizedBox(
                 height: 30,
               ),
-              Rigister(
+              Register(
                 press: () {
                   Navigator.pop(
                     context,
