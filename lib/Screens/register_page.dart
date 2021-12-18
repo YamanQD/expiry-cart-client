@@ -16,8 +16,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  bool visibilty = true;
-  bool confi_visibilty = true;
+  bool passwordVisibility = true;
+  bool confirmationVisibility = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,17 +57,19 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        visibilty ? Icons.visibility : Icons.visibility_off,
+                        passwordVisibility
+                            ? Icons.visibility
+                            : Icons.visibility_off,
                       ),
                       onPressed: () {
                         setState(() {
-                          visibilty = !visibilty;
+                          passwordVisibility = !passwordVisibility;
                         });
                       },
                     ),
                     border: InputBorder.none,
                   ),
-                  obscureText: visibilty,
+                  obscureText: passwordVisibility,
                   keyboardType: TextInputType.visiblePassword,
                 ),
               ),
@@ -90,19 +92,19 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        confi_visibilty
+                        confirmationVisibility
                             ? Icons.visibility
                             : Icons.visibility_off,
                       ),
                       onPressed: () {
                         setState(() {
-                          confi_visibilty = !confi_visibilty;
+                          confirmationVisibility = !confirmationVisibility;
                         });
                       },
                     ),
                     border: InputBorder.none,
                   ),
-                  obscureText: confi_visibilty,
+                  obscureText: confirmationVisibility,
                   keyboardType: TextInputType.visiblePassword,
                 ),
               ),
