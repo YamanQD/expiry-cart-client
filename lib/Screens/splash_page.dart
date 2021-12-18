@@ -24,7 +24,7 @@ class SplashPage extends StatelessWidget {
       body: Container(
         color: kGreenColor,
         alignment: Alignment.center,
-        child: AppIcon(),
+        child: const AppIcon(),
       ),
     );
   }

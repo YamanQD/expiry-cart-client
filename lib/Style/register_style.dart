@@ -8,8 +8,8 @@ class EmailStyle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RegisterField(
-      child: const TextField(
+    return const RegisterField(
+      child: TextField(
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           hintText: "Enter your Email",
@@ -33,8 +33,8 @@ class EmailStyle extends StatelessWidget {
 class UserNameStyle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RegisterField(
-      child: const TextField(
+    return const RegisterField(
+      child: TextField(
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           hintText: "Enter username",
@@ -58,7 +58,7 @@ class UserNameStyle extends StatelessWidget {
 class RegisterField extends StatelessWidget {
   final Widget child;
 
-  RegisterField({@required this.child});
+  const RegisterField({@required this.child});
   @override
   Widget build(BuildContext context) {
     return Container(

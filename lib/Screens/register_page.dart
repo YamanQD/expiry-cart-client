@@ -27,7 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Center(
+              const Center(
                 child: AppIcon(),
               ),
               const SizedBox(
@@ -37,7 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 15,
               ),
-              EmailStyle(),
+              const EmailStyle(),
               const SizedBox(
                 height: 15,
               ),
@@ -121,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Navigator.pop(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SignIn(),
+                      builder: (context) => const SignIn(),
                     ),
                   );
                 },

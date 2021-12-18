@@ -28,7 +28,7 @@ class WelcomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Center(
+                  const Center(
                     child: AppIcon(),
                   ),
                   const SizedBox(
@@ -56,7 +56,7 @@ class WelcomePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignIn(),
+                          builder: (context) => const SignIn(),
                         ),
                       );
                     },

@@ -21,7 +21,7 @@ class SignIn extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Center(
+              const Center(
                 child: AppIcon(),
               ),
               const SizedBox(
@@ -42,7 +42,7 @@ class SignIn extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Passwordfield(),
+              const Passwordfield(),
               const SizedBox(
                 height: 50,
               ),
@@ -58,7 +58,7 @@ class SignIn extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => RegisterPage(),
+                      builder: (context) => const RegisterPage(),
                     ),
                   );
                 },
