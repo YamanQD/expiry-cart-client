@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:expiry_cart/Screens/signInpage.dart';
+import 'package:expiry_cart/Screens/signInPage.dart';
 import 'package:expiry_cart/Style/appIcon.dart';
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:expiry_cart/Style/register.dart';

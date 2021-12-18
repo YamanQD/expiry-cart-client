@@ -1,6 +1,6 @@
-import 'package:expiry_cart/Screens/splashpage.dart';
+import 'package:expiry_cart/Screens/splashPage.dart';
 import 'package:flutter/material.dart';
-import 'package:expiry_cart/Screens/welcomepage.dart';
+import 'package:expiry_cart/Screens/welcomePage.dart';
 
 void main() => runApp(MaterialApp(
       home: SplashPage(
@@ -8,4 +8,3 @@ void main() => runApp(MaterialApp(
         navigateToPage: WelcomePage(),
       ),
     ));
-
