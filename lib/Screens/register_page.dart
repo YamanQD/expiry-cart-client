@@ -33,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 60,
               ),
-              UserNameStyle(),
+              const UserNameStyle(),
               const SizedBox(
                 height: 15,
               ),
