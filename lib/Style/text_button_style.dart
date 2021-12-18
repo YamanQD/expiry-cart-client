@@ -13,12 +13,14 @@ class TextButtonStyle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 30, right: 30),
-      child: FlatButton(
-        color: kGreenColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.all(25),
+          backgroundColor: kGreenColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
         ),
-        padding: const EdgeInsets.all(25),
         onPressed: press,
         child: Text(
           text,

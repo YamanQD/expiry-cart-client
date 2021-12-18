@@ -17,7 +17,7 @@ class Register extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(accountext),
-        FlatButton(
+        TextButton(
           onPressed: press,
           child: Text(
             text,
