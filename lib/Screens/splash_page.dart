@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 //splash page has a duration of 5 sec and will move to welcome page.
 class SplashPage extends StatelessWidget {
   int duration = 0;
-  Widget navigateToPage;
+  final Widget navigateToPage;
 
-  SplashPage({this.navigateToPage, this.duration});
+  SplashPage({Key key, final this.navigateToPage, this.duration})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: this.duration), () {

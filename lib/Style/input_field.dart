@@ -8,9 +8,11 @@ class InputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   const InputField({
+    Key key,
     @required this.hintText,
     @required this.icon,
-  });
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(

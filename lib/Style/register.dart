@@ -5,11 +5,12 @@ class Register extends StatelessWidget {
   final String accountext;
   final String text;
   final Function press;
-  Register({
+  const Register({
+    Key key,
     @required this.press,
     @required this.accountext,
     @required this.text,
-  });
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(

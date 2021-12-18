@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 class TextButtonStyle extends StatelessWidget {
   final String text;
   final Function press;
-  const TextButtonStyle({@required this.text, @required this.press});
+  const TextButtonStyle({Key key, @required this.text, @required this.press})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(

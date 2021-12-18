@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
 
-  const TextFieldContainer({@required this.child});
+  const TextFieldContainer({Key key, @required this.child}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
