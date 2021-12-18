@@ -96,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       onPressed: () {
                         setState(() {
-                          confi_visibilty = confi_visibilty;
+                          confi_visibilty = !confi_visibilty;
                         });
                       },
                     ),
