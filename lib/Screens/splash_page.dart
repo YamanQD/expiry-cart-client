@@ -12,7 +12,7 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: this.duration), () {
+    Future.delayed(Duration(seconds: duration), () {
       Navigator.push(
         context,
         MaterialPageRoute(
