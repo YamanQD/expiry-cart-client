@@ -1,4 +1,4 @@
-import 'package:expiry_cart/Style/appIcon.dart';
+import 'package:expiry_cart/Style/app_icon.dart';
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -27,5 +27,3 @@ class SplashPage extends StatelessWidget {
     );
   }
 }
-
-

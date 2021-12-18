@@ -1,12 +1,12 @@
 // ignore_for_file: file_names
 
-import 'package:expiry_cart/Screens/registerPage.dart';
-import 'package:expiry_cart/Style/appIcon.dart';
+import 'package:expiry_cart/Screens/register_page.dart';
+import 'package:expiry_cart/Style/app_icon.dart';
 import 'package:expiry_cart/Style/constant.dart';
-import 'package:expiry_cart/Style/inputField.dart';
-import 'package:expiry_cart/Style/passwordField.dart';
+import 'package:expiry_cart/Style/input_field.dart';
+import 'package:expiry_cart/Style/password_field.dart';
 import 'package:expiry_cart/Style/register.dart';
-import 'package:expiry_cart/Style/textButtonStyle.dart';
+import 'package:expiry_cart/Style/text_button_style.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatelessWidget {

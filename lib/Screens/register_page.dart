@@ -1,11 +1,11 @@
 // ignore_for_file: file_names
 
-import 'package:expiry_cart/Screens/signInPage.dart';
-import 'package:expiry_cart/Style/appIcon.dart';
+import 'package:expiry_cart/Screens/sign_in_page.dart';
+import 'package:expiry_cart/Style/app_icon.dart';
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:expiry_cart/Style/register.dart';
-import 'package:expiry_cart/Style/registerStyle.dart';
-import 'package:expiry_cart/Style/textButtonStyle.dart';
+import 'package:expiry_cart/Style/register_style.dart';
+import 'package:expiry_cart/Style/text_button_style.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
