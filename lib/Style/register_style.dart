@@ -31,6 +31,8 @@ class EmailStyle extends StatelessWidget {
 }
 
 class UserNameStyle extends StatelessWidget {
+  const UserNameStyle({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return const RegisterField(
@@ -58,7 +60,7 @@ class UserNameStyle extends StatelessWidget {
 class RegisterField extends StatelessWidget {
   final Widget child;
 
-  const RegisterField({@required this.child});
+  const RegisterField({Key key, @required this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
