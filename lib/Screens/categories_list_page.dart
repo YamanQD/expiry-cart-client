@@ -10,7 +10,7 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: const Drawer(),
       appBar: AppBar(
         title: const Center(
           child: Text(
@@ -25,8 +25,8 @@ class Categories extends StatelessWidget {
       body: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Padding(
+          children: const [
+            Padding(
               padding: EdgeInsets.all(10),
               child: Text(
                 'Select a Category',
@@ -36,7 +36,6 @@ class Categories extends StatelessWidget {
                 ),
               ),
             ),
-            
           ],
         ),
       ),
