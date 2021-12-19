@@ -23,3 +23,8 @@ const kWelcome = TextStyle(
   fontSize: 40,
   fontWeight: FontWeight.bold,
 );
+const kTextStyle = TextStyle(
+  fontSize: 30,
+  color: kGreenColor,
+  fontWeight: FontWeight.bold,
+);

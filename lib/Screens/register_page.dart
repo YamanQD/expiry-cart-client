@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:expiry_cart/Screens/sign_in_page.dart';
+import 'package:expiry_cart/Screens/success_page.dart';
 import 'package:expiry_cart/Style/app_icon.dart';
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:expiry_cart/Style/register.dart';
@@ -111,7 +112,14 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               TextButtonStyle(
                 text: 'Sign Up',
-                press: () {},
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SuccessPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(
                 height: 30,

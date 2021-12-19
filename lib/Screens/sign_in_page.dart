@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:expiry_cart/Screens/success_page.dart';
 import 'package:expiry_cart/Screens/register_page.dart';
 import 'package:expiry_cart/Style/app_icon.dart';
 import 'package:expiry_cart/Style/constant.dart';
@@ -48,7 +49,14 @@ class SignIn extends StatelessWidget {
               ),
               TextButtonStyle(
                 text: 'LOGIN',
-                press: () {},
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SuccessPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(
                 height: 30,
