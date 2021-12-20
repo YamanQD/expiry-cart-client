@@ -19,6 +19,21 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool passwordVisibility = true;
   bool confirmationVisibility = true;
+  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,16 +49,21 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 60,
               ),
-              const UserNameStyle(),
+              UserNameStyle(
+                controller: usernameController,
+              ),
               const SizedBox(
                 height: 15,
               ),
-              const EmailStyle(),
+              EmailStyle(
+                controller: emailController,
+              ),
               const SizedBox(
                 height: 15,
               ),
               RegisterField(
                 child: TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(
                     hintText: "Password",
                     hintStyle: const TextStyle(
@@ -79,6 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               RegisterField(
                 child: TextField(
+                  controller: confirmController,
                   decoration: InputDecoration(
                     hintText: "Re-Enter Password",
                     hintStyle: const TextStyle(
