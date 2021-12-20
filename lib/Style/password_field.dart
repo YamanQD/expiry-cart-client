@@ -5,26 +5,30 @@ import 'package:expiry_cart/Style/text_field_container.dart';
 import 'package:flutter/material.dart';
 
 class Passwordfield extends StatelessWidget {
-  const Passwordfield({Key key}) : super(key: key);
+  final Function optap;
+  const Passwordfield({Key key,@required this.optap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const TextFieldContainer(
-      child: TextField(
-        obscureText: true,
-        decoration: InputDecoration(
-          hintText: 'Password',
-          hintStyle: TextStyle(
-            color: Colors.grey,
-          ),
-          icon: Padding(
-            padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-            child: Icon(
-              Icons.lock,
-              color: kGreenColor,
+    return  TextFieldContainer(
+      child: GestureDetector (
+        onTap: optap,
+        child:const TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+            hintText: 'Password',
+            hintStyle: TextStyle(
+              color: Colors.grey,
             ),
+            icon: Padding(
+              padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+              child: Icon(
+                Icons.lock,
+                color: kGreenColor,
+              ),
+            ),
+            border: InputBorder.none,
           ),
-          border: InputBorder.none,
         ),
       ),
     );

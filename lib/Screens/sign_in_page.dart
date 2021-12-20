@@ -10,9 +10,14 @@ import 'package:expiry_cart/Style/register.dart';
 import 'package:expiry_cart/Style/text_button_style.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   const SignIn({Key key}) : super(key: key);
 
+  @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +41,21 @@ class SignIn extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const InputField(
+              InputField(
                 hintText: 'Your Email',
                 icon: Icons.person,
+                ontap: () {
+                  setState(() {});
+                },
               ),
               const SizedBox(
                 height: 20,
               ),
-              const Passwordfield(),
+              Passwordfield(
+                optap: () {
+                  setState(() {});
+                },
+              ),
               const SizedBox(
                 height: 50,
               ),
