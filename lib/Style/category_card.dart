@@ -21,8 +21,8 @@ class CategoryCard extends StatelessWidget {
     return TextButton(
       onPressed: press,
       child: Container(
-        margin: const EdgeInsets.all(10),
-        height: 150,
+        margin: const EdgeInsets.all(9),
+        height: 140,
         child: Stack(
           children: [
             CategoryImage(
