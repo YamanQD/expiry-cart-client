@@ -28,3 +28,7 @@ flutter:
     - family: Meow Script
       fonts:
         - asset: fonts/MeowScript-Regular.ttf
+    - family: IBM Plex Sans
+      fonts:
+        - asset: fonts/IBMPlexSans-Regular.ttf
+    

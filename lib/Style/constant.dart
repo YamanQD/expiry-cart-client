@@ -28,3 +28,8 @@ const kTextStyle = TextStyle(
   color: kGreenColor,
   fontWeight: FontWeight.bold,
 );
+const kCategoriesName = TextStyle(
+    fontSize: 21,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'IBM Plex Sans');
