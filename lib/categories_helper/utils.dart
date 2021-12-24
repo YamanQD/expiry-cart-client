@@ -6,31 +6,31 @@ class Utils {
     return [
       Category(
         name: 'Canned Food',
-        imgName: 'imgName',
+        imgName: 'images/cat1.jpg',
       ),
       Category(
         name: 'Dairy and Eggs',
-        imgName: 'imgName',
+        imgName: 'images/cat2.jpeg',
       ),
       Category(
         name: 'Fruits and Vegetables',
-        imgName: 'imgName',
+        imgName: 'images/cat3.jpg',
       ),
       Category(
         name: 'Meats, Fish and Poultry',
-        imgName: 'imgName',
+        imgName: 'images/cat4.jpg',
       ),
       Category(
         name: 'Beverages',
-        imgName: 'imgName',
+        imgName: 'images/cat5.jpg',
       ),
       Category(
         name: 'Bakery and Snakes',
-        imgName: 'imgName',
+        imgName: 'images/cat6.jpeg',
       ),
       Category(
         name: 'Medicines and Personal Care',
-        imgName: 'imgName',
+        imgName: 'images/cat7.jpg',
       ),
     ];
   }
