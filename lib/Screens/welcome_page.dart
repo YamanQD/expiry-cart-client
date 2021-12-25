@@ -1,7 +1,9 @@
 import 'package:expiry_cart/Screens/sign_in_page.dart';
+import 'package:expiry_cart/Screens/categories_list_page.dart';
 import 'package:expiry_cart/Style/app_icon.dart';
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:expiry_cart/Style/text_button_style.dart';
+import 'package:expiry_cart/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -52,13 +54,22 @@ class WelcomePage extends StatelessWidget {
                   ),
                   TextButtonStyle(
                     text: 'Sign In',
-                    press: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignIn(),
-                        ),
-                      );
+                    press: () async {
+                      if (await Auth.useTokenFromStorage()) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Categories(),
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignIn(),
+                          ),
+                        );
+                      }
                     },
                   ),
                 ],

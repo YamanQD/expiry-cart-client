@@ -5,14 +5,16 @@ import 'package:expiry_cart/Style/text_field_container.dart';
 import 'package:flutter/material.dart';
 
 class Passwordfield extends StatelessWidget {
-  const Passwordfield({Key key}) : super(key: key);
+  TextEditingController controller;
+  Passwordfield({Key key, this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const TextFieldContainer(
+    return TextFieldContainer(
       child: TextField(
+        controller: controller,
         obscureText: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Password',
           hintStyle: TextStyle(
             color: Colors.grey,
