@@ -1,3 +1,4 @@
+import 'package:expiry_cart/Screens/categories_list_page.dart';
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:expiry_cart/Style/text_button_style.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,10 @@ class SuccessPage extends StatelessWidget {
           ),
           TextButtonStyle(
             text: 'Get Started',
-            press: () {},
+            press: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Categories()));
+            },
           ),
         ],
       ),

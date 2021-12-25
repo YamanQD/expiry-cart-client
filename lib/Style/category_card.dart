@@ -21,8 +21,8 @@ class CategoryCard extends StatelessWidget {
     return TextButton(
       onPressed: press,
       child: Container(
-        margin: const EdgeInsets.all(9),
-        height: 140,
+        margin: const EdgeInsets.only(right: 18, left: 18, top: 5, bottom: 2),
+        height: 160,
         child: Stack(
           children: [
             CategoryImage(
@@ -55,17 +55,10 @@ class CategoryName extends StatelessWidget {
     return Positioned(
       bottom: 0.3,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.white70,
-          ),
-          child: Text(
-            categoryName,
-            style: kCategoriesName,
-          ),
+        padding: const EdgeInsets.all(11.0),
+        child: Text(
+          categoryName,
+          style: kCategoriesName,
         ),
       ),
     );
@@ -87,9 +80,15 @@ class CategoryImage extends StatelessWidget {
     return Positioned.fill(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(18.0),
-        child: Image.asset(
-          categoryImage,
-          fit: BoxFit.cover,
+        child: Container(
+          color: Colors.black,
+          child: Opacity(
+            opacity: 0.6,
+            child: Image.asset(
+              categoryImage,
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
       ),
     );

@@ -29,7 +29,19 @@ const kTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 const kCategoriesName = TextStyle(
-    fontSize: 21,
-    color: Colors.black,
-    fontWeight: FontWeight.bold,
-    fontFamily: 'IBM Plex Sans');
+  fontSize: 21,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'IBM Plex Sans',
+);
+const kProductName = TextStyle(
+  fontSize: 25,
+  color: Colors.black45,
+  fontWeight: FontWeight.bold,
+);
+
+const kAppBarText = TextStyle(
+  color: kGreenColor,
+  fontSize: 25,
+  fontWeight: FontWeight.bold,
+);
