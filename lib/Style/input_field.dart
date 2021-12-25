@@ -16,7 +16,7 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child:  TextField(
+      child: TextField(
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           icon: Padding(
@@ -33,6 +33,6 @@ class InputField extends StatelessWidget {
           border: InputBorder.none,
         ),
       ),
-    );
+      );
   }
 }

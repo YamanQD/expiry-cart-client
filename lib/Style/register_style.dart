@@ -4,14 +4,17 @@ import 'package:expiry_cart/Style/constant.dart';
 import 'package:flutter/material.dart';
 
 class EmailStyle extends StatelessWidget {
-  const EmailStyle({Key key}) : super(key: key);
+  TextEditingController controller;
+
+  EmailStyle({Key key, this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const RegisterField(
+    return RegisterField(
       child: TextField(
+        controller: controller,
         keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: "Enter your Email",
           hintStyle: TextStyle(
             color: Colors.grey,
@@ -31,14 +34,17 @@ class EmailStyle extends StatelessWidget {
 }
 
 class UserNameStyle extends StatelessWidget {
-  const UserNameStyle({Key key}) : super(key: key);
+  TextEditingController controller;
+
+  UserNameStyle({Key key, this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const RegisterField(
+    return RegisterField(
       child: TextField(
+        controller: controller,
         keyboardType: TextInputType.text,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: "Enter username",
           hintStyle: TextStyle(
             color: Colors.grey,
