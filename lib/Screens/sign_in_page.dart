@@ -44,17 +44,17 @@ class _SignInState extends State<SignIn> {
               InputField(
                 hintText: 'Your Email',
                 icon: Icons.person,
-                ontap: () {
-                  setState(() {});
-                },
+                // ontap: () {
+                //   setState(() {});
+                // },
               ),
               const SizedBox(
                 height: 20,
               ),
               Passwordfield(
-                optap: () {
-                  setState(() {});
-                },
+                // optap: () {
+                //   setState(() {});
+                // },
               ),
               const SizedBox(
                 height: 50,
