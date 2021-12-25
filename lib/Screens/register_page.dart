@@ -8,6 +8,14 @@ import 'package:expiry_cart/Style/register.dart';
 import 'package:expiry_cart/Style/register_style.dart';
 import 'package:expiry_cart/Style/text_button_style.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+String getError(dynamic errors, String name) {
+  return errors[name] != null
+      ? errors[name].toString().replaceAll(RegExp(r"\[|\]"), '')
+      : '';
+}
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key key}) : super(key: key);
@@ -17,12 +25,14 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final apiUri = 'http://yaman.muhajreen.net:8000/api/';
   bool passwordVisibility = true;
   bool confirmationVisibility = true;
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmController = TextEditingController();
+  String usernameError, emailError, passwordError, confirmError;
 
   @override
   void dispose() {
@@ -32,6 +42,46 @@ class _RegisterPageState extends State<RegisterPage> {
     passwordController.dispose();
     confirmController.dispose();
     super.dispose();
+  }
+
+  void handleRegister(
+    String username,
+    String email,
+    String password,
+    String confirmPassword,
+    BuildContext context,
+  ) async {
+    final response = await http.post(
+      Uri.parse(apiUri + 'register'),
+      body: jsonEncode({
+        'name': username,
+        'email': email,
+        'password': password,
+        'password_confirmation': confirmPassword,
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 201) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const SuccessPage(),
+        ),
+      );
+    } else {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      var errors = responseData['errors'];
+      setState(() {
+        usernameError = getError(errors, 'name');
+        emailError = getError(errors, 'email');
+        passwordError = getError(errors, 'password');
+        confirmError = getError(errors, 'password_confirmation');
+      });
+    }
   }
 
   @override
@@ -52,11 +102,25 @@ class _RegisterPageState extends State<RegisterPage> {
               UserNameStyle(
                 controller: usernameController,
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 84, top: 2),
+                child: Text(
+                  usernameError ?? '',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
               const SizedBox(
                 height: 15,
               ),
               EmailStyle(
                 controller: emailController,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 84, top: 2),
+                child: Text(
+                  emailError ?? '',
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
               const SizedBox(
                 height: 15,
@@ -69,7 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     hintStyle: const TextStyle(
                       color: Colors.grey,
                     ),
-                    prefixIcon: const Padding(
+                    icon: const Padding(
                       padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
                       child: Icon(
                         Icons.lock,
@@ -94,6 +158,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   keyboardType: TextInputType.visiblePassword,
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 84, top: 2),
+                child: Text(
+                  passwordError ?? '',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
               const SizedBox(
                 height: 15,
               ),
@@ -105,7 +176,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     hintStyle: const TextStyle(
                       color: Colors.grey,
                     ),
-                    prefixIcon: const Padding(
+                    icon: const Padding(
                       padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
                       child: Icon(
                         Icons.lock,
@@ -130,19 +201,35 @@ class _RegisterPageState extends State<RegisterPage> {
                   keyboardType: TextInputType.visiblePassword,
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 84, top: 2),
+                child: Text(
+                  confirmError ?? '',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
               const SizedBox(
                 height: 30,
               ),
               TextButtonStyle(
                 text: 'Sign Up',
                 press: () {
-                  Navigator.push(
+                  handleRegister(
+                    usernameController.text,
+                    emailController.text,
+                    passwordController.text,
+                    confirmController.text,
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const SuccessPage(),
-                    ),
                   );
                 },
+                // press: () {
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const SuccessPage(),
+                //     ),
+                //   );
+                // },
               ),
               const SizedBox(
                 height: 30,
