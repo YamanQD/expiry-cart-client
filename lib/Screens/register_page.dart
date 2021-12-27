@@ -106,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: const EdgeInsets.only(left: 84, top: 2),
                 child: Text(
                   usernameError ?? '',
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 ),
               ),
               const SizedBox(
@@ -119,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: const EdgeInsets.only(left: 84, top: 2),
                 child: Text(
                   emailError ?? '',
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 ),
               ),
               const SizedBox(
@@ -205,7 +205,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: const EdgeInsets.only(left: 84, top: 2),
                 child: Text(
                   confirmError ?? '',
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 ),
               ),
               const SizedBox(
@@ -243,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   );
                 },
-                accountext: 'Already have have an Account?',
+                accountext: 'Already have an Account?',
                 text: 'Sign In',
               ),
             ],

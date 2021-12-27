@@ -45,3 +45,19 @@ const kAppBarText = TextStyle(
   fontSize: 25,
   fontWeight: FontWeight.bold,
 );
+const kProductsName = TextStyle(
+  fontSize: 36,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+const kDetailsText = TextStyle(
+  fontSize: 18,
+  color: Colors.black26,
+  fontFamily: 'IBM Plex Sans',
+);
+const ktext = TextStyle(
+  fontSize: 15,
+  color: Colors.black26,
+  fontFamily: 'IBM Plex Sans',
+);
+

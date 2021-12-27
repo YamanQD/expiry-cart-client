@@ -1,5 +1,4 @@
-// ignore_for_file: file_names
-
+import 'package:expiry_cart/Screens/add_product_page.dart';
 import 'package:expiry_cart/Screens/product_page.dart';
 import 'package:expiry_cart/Style/bar_icons_style.dart';
 import 'package:expiry_cart/Style/category_card.dart';
@@ -109,13 +108,18 @@ class _BottomBarState extends State<BottomBar> {
             children: [
               IconStyle(
                   press: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Categories()));
+                  },
+                  icon: Icons.home),
+              IconStyle(
+                  press: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Categories()));
+                            builder: (context) => const AddProductPage()));
                   },
-                  icon: Icons.home),
-              IconStyle(press: () {}, icon: Icons.add_circle),
+                  icon: Icons.add_circle),
               IconStyle(press: () {}, icon: Icons.settings),
               IconStyle(press: () {}, icon: Icons.account_circle),
             ],
