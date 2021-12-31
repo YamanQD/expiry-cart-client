@@ -108,8 +108,9 @@ class _BottomBarState extends State<BottomBar> {
             children: [
               IconStyle(
                   press: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Categories()));
+                    setState(() {
+                      Categories();
+                    });
                   },
                   icon: Icons.home),
               IconStyle(

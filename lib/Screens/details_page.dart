@@ -72,7 +72,7 @@ class _DetailsPageState extends State<DetailsPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 12, left: 12, top: 8),
+                  padding: const EdgeInsets.only(right: 12, left: 15, top: 8),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -83,7 +83,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   textAlign: TextAlign.start,
                                   style: kDetailsText),
                               DetailsContainer(
-                                width: 120,
+                                width: 150,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 12, right: 12),
@@ -94,7 +94,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                         Icon(Icons.remove_red_eye,
                                             color: Colors.red),
                                         Text(
-                                          '1',
+                                          '0',
                                           style: TextStyle(fontSize: 17),
                                         ),
                                       ]),
@@ -110,7 +110,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                     textAlign: TextAlign.start,
                                     style: kDetailsText),
                                 DetailsContainer(
-                                  width: 170,
+                                  width: 180,
                                   child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -146,157 +146,70 @@ class _DetailsPageState extends State<DetailsPage> {
                       ]),
                 ),
                 const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 12),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Price:',
-                                style: kDetailsText,
-                              ),
-                              DetailsContainer(
-                                width: 180,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(9.0),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Icon(
-                                          Icons.attach_money,
-                                          color: Colors.green,
-                                        ),
-                                        Row(children: const [
-                                          Text(
-                                            '2000',
-                                            style: TextStyle(fontSize: 17),
-                                          ),
-                                          Text(
-                                            'SP',
-                                            style: ktext,
-                                          ),
-                                        ]),
-                                      ]),
-                                ),
-                              ),
-                            ]),
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Quantity:', style: kDetailsText),
-                              DetailsContainer(
-                                width: 170,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(11.0),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: const [
-                                        Icon(Icons.production_quantity_limits,
-                                            color: Colors.green),
-                                        Text(
-                                          '25',
-                                          style: TextStyle(fontSize: 17),
-                                        ),
-                                      ]),
-                                ),
-                              ),
-                            ]),
-                      ]),
-                ),
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Expiry Date:', style: kDetailsText),
-                              DetailsContainer(
-                                width: 165,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(9.0),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: const [
-                                        Icon(Icons.date_range,
-                                            color: Colors.green),
-                                        Text('0/00/0000',
-                                            style: TextStyle(fontSize: 17)),
-                                      ]),
-                                ),
-                              )
-                            ]),
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Contact Informations:',
-                                  style: kDetailsText),
-                              DetailsContainer(
-                                width: 180,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(9.0),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: const [
-                                        Icon(Icons.phone, color: Colors.green),
-                                        Text(' 9999 999 999',
-                                            style: TextStyle(fontSize: 17)),
-                                      ]),
-                                ),
-                              )
-                            ])
-                      ]),
-                ),
-                const SizedBox(height: 60),
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(38),
-                    topRight: Radius.circular(38),
-                  ),
-                  child: Container(
-                    color: kGreenLightColor,
-                    height: 60,
-                    width: 280,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        DetailsColumn(
-                            icon: Icons.edit,
-                            text: 'Edit',
-                            color: kGreenColor,
-                            press: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>const AddProductPage()));
-                            }),
-                        DetailsColumn(
-                            icon: Icons.add_comment,
-                            text: 'comment',
-                            color: kGreenColor,
-                            press: () {}),
-                        DetailsColumn(
-                            icon: Icons.delete,
-                            text: 'Delete',
-                            color: Colors.red,
-                            press: () {}),
-                      ],
-                    ),
-                  ),
-                ),
+                const D_Container(
+                    text: 'Price:', icon: Icons.attach_money, text1: '0000'),
+                const SizedBox(height: 7),
+                const D_Container(
+                    text: 'Quantity:',
+                    icon: Icons.production_quantity_limits,
+                    text1: '0000'),
+                const SizedBox(height: 7),
+                const D_Container(
+                    text: 'Expiry Date:',
+                    icon: Icons.date_range,
+                    text1: '0000000'),
+                const SizedBox(height: 7),
+                const D_Container(
+                    text: 'Contact Information:',
+                    icon: Icons.phone,
+                    text1: '000000000'),
+                const SizedBox(height: 30),
               ],
             ),
           )
         ]),
+      ),
+    );
+  }
+}
+
+class D_Container extends StatelessWidget {
+  final String text;
+  final IconData icon;
+  final String text1;
+  const D_Container({
+    Key key,
+    @required this.text,
+    @required this.icon,
+    @required this.text1,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            text,
+            style: kDetailsText,
+          ),
+          DetailsContainer(
+            width: 270,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(icon, color: kGreenColor),
+                  Text(text1, style: TextStyle(fontSize: 17)),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

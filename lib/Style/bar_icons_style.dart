@@ -1,7 +1,7 @@
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:flutter/material.dart';
 
-class IconStyle extends StatelessWidget {
+class IconStyle extends StatefulWidget {
   final Function press;
   final IconData icon;
   const IconStyle({
@@ -11,11 +11,16 @@ class IconStyle extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<IconStyle> createState() => _IconStyleState();
+}
+
+class _IconStyleState extends State<IconStyle> {
+  @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: press,
+      onPressed: widget.press,
       child: Icon(
-        icon,
+        widget.icon,
         color: kGreenColor,
         size: 30,
       ),

@@ -20,7 +20,7 @@ class DetailsContainer extends StatelessWidget {
       ),
       child: Container(
         color: kGreenLightColor,
-        height: 40,
+        height: 45,
         width: width,
         child: child,
       ),

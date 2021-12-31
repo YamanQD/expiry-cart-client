@@ -13,16 +13,19 @@ class AddProductPage extends StatefulWidget {
 }
 
 class _AddProductPageState extends State<AddProductPage> {
-  // name , phone , price , quantity
-  String _ProductName, _Phone_Number, _Price, _Quantity;
+// name , phone , price , quantity
+
+  String _ProductName, _description  , _Phone_Number, _Price, _discount1 , _discount2 ,  _Quantity;
   static final RegExp nameRegExp = RegExp('[a-zA-Z]');
   static final RegExp numberRegExp = RegExp(r'\d');
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
-  //  add product image
+//  add product image
+
   File _imageFile;
   final ImagePicker _picker = ImagePicker();
+
   void _pickImage(ImageSource src) async {
     final pickedImageFile = await _picker.getImage(source: src);
     if (pickedImageFile != null) {
@@ -34,8 +37,10 @@ class _AddProductPageState extends State<AddProductPage> {
     }
   }
 
-  //         select product type
+//         select product type
+
   var ProductChosse;
+
   final List<String> listItem = [
     "Canned & Food",
     "Dairy & Eggs",
@@ -46,14 +51,16 @@ class _AddProductPageState extends State<AddProductPage> {
     "Medicines & Persona Care"
   ];
 
-  // Expiration date
+// Expiration date
+
   DateTime _dateTime = DateTime.now();
+
   void _datePicker() {
     showDatePicker(
       context: context,
-      initialDate: DateTime.utc(2022, 12, 31),
+      initialDate: DateTime.now(),
       firstDate: DateTime.now(),
-      lastDate: DateTime(2026),
+      lastDate: DateTime(DateTime.now().year +5),
     ).then((value) {
       if (value == null) {
         return;
@@ -76,9 +83,9 @@ class _AddProductPageState extends State<AddProductPage> {
           child: Form(
         key: _formKey,
         child: Column(children: <Widget>[
-          // add image
+// add image
           const SizedBox(
-            height: 8,
+            height: 9,
           ),
           CircleAvatar(
             radius: 40,
@@ -113,7 +120,9 @@ class _AddProductPageState extends State<AddProductPage> {
           const SizedBox(
             height: 8,
           ),
-          // select product
+
+// select product
+
           DropdownButtonFormField(
             icon: const Icon(Icons.arrow_drop_down),
             dropdownColor: const Color(0xFFFFFFFF),
@@ -125,15 +134,14 @@ class _AddProductPageState extends State<AddProductPage> {
               style: TextStyle(fontSize: 20, color: Colors.black),
             ),
             isExpanded: true,
-            //  underline :true,
             value: ProductChosse,
             onChanged: (newValue) {
               setState(() {
                 ProductChosse = newValue;
-                validator:
-                (newValue) => newValue == null ? 'field required' : null;
               });
             },
+            validator:
+              (newValue) => newValue == null ? 'Please select product type ' : null,
             items: listItem.map((valueItem) {
               return DropdownMenuItem(
                 value: valueItem,
@@ -141,7 +149,9 @@ class _AddProductPageState extends State<AddProductPage> {
               );
             }).toList(),
           ),
-          // product name
+
+           // product name
+
           Container(
             color: const Color(0xFFFFFFFF),
             margin: const EdgeInsets.all(8.0),
@@ -155,12 +165,6 @@ class _AddProductPageState extends State<AddProductPage> {
                   prefixIcon: Icon(Icons.add_box_sharp)),
               textAlign: TextAlign.left,
               keyboardType: TextInputType.text,
-              // validator:  (val) {
-              //   if (val.isEmpty || double.parse(val) > 0){
-              //     return " Invalid name ";
-              //   }return null;
-              //
-              //  },
               validator: (value) => value.isEmpty
                   ? 'Enter Your Name'
                   : (nameRegExp.hasMatch(value) ? null : 'Enter a Valid Name'),
@@ -170,7 +174,35 @@ class _AddProductPageState extends State<AddProductPage> {
               },
             ),
           ),
-          // phone number
+
+        // description
+
+          Container(
+            color: const Color(0xFFFFFFFF),
+            margin: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                      borderSide: BorderSide(color: Colors.black)),
+                  labelText: "  Product Description ",
+                  labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                  prefixIcon: Icon(Icons.short_text_rounded)),
+              textAlign: TextAlign.left,
+              keyboardType: TextInputType.text,
+              validator: (value) => value.isEmpty
+                  ? 'Enter the description '
+                  : (nameRegExp.hasMatch(value) ? null : 'Enter a Valid description'),
+              onSaved: (String des) {
+                _description = des;
+                print(_description);
+              },
+            ),
+          ),
+
+
+        // phone number
+
           Container(
             color: const Color(0xFFFFFFFF),
             margin: const EdgeInsets.all(8.0),
@@ -200,7 +232,9 @@ class _AddProductPageState extends State<AddProductPage> {
               },
             ),
           ),
-          // product price
+
+// product price
+
           Container(
             color: const Color(0xFFFFFFFF),
             margin: const EdgeInsets.all(8.0),
@@ -218,13 +252,13 @@ class _AddProductPageState extends State<AddProductPage> {
               validator: (String value) {
                 double _parsedValue = double.tryParse(value);
                 if (_parsedValue == null) {
-                  return "Please input a valid price";
+                  return "Please enter a valid price";
                 }
                 if (_parsedValue == 0.0) {
-                  return "Please input a valid price";
+                  return "Please enter a valid price";
                 }
                 if (double.parse(value) <= 0) {
-                  return "Please input a valid price";
+                  return "Please enter a valid price";
                 }
               },
               onSaved: (value) {
@@ -233,7 +267,73 @@ class _AddProductPageState extends State<AddProductPage> {
               },
             ),
           ),
-          // quantity
+
+          Container(
+            color: const Color(0xFFFFFFFF),
+            margin: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                      borderSide: BorderSide(color: Colors.black)),
+                  labelText: "  30 days discount ",
+                  labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                  prefixIcon: Icon(Icons.analytics_outlined),
+                  suffixText: " %            "),
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              validator: (String value) {
+                double _parsedValue = double.tryParse(value);
+                if (_parsedValue == null) {
+                  return "Please enter a valid discount ";
+                }
+                if (double.parse(value) <= 0) {
+                  return "Please enter a valid discount";
+                }
+                if (double.parse(value) > 100) {
+                  return "Please enter a valid discount";
+                }
+              },
+              onSaved: (value) {
+                _discount1 = value;
+                print(_discount1);
+              },
+            ),
+          ),
+// quantity
+          Container(
+            color: const Color(0xFFFFFFFF),
+            margin: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                      borderSide: BorderSide(color: Colors.black)),
+                  labelText: "  15 days discount ",
+                  labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                  prefixIcon: Icon(Icons.analytics_outlined),
+                  suffixText: " %            "),
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              validator: (String value) {
+                double _parsedValue = double.tryParse(value);
+                if (_parsedValue == null) {
+                  return "Please enter a valid discount ";
+                }
+                if (double.parse(value) <= 0) {
+                  return "Please enter a valid discount";
+                }
+                if (double.parse(value) > 100) {
+                  return "Please enter a valid discount";
+                }
+              },
+              onSaved: (value) {
+                _discount2 = value;
+                print(_discount2);
+              },
+            ),
+          ),
+
           Container(
             color: const Color(0xFFFFFFFF),
             margin: const EdgeInsets.all(8.0),
@@ -251,13 +351,16 @@ class _AddProductPageState extends State<AddProductPage> {
               validator: (String value) {
                 double _parsedValue = double.tryParse(value);
                 if (_parsedValue == null) {
-                  return "Please input a valid quantity";
+                  return "Please enter a valid quantity";
                 }
                 if (_parsedValue == 0.0) {
-                  return "Please input a valid quantity";
+                  return "Please enter a valid quantity";
                 }
                 if (double.parse(value) <= 0) {
-                  return "Please input a valid quantity";
+                  return "Please enter a valid quantity";
+                }
+                if (double.parse(value) > 1000) {
+                  return "Please enter a valid quantity";
                 }
               },
               onSaved: (value) {
@@ -266,18 +369,27 @@ class _AddProductPageState extends State<AddProductPage> {
               },
             ),
           ),
-          // expiration date   ElevatedButton
+
+
+             // expiration date   ElevatedButton
+
           Container(
             margin: const EdgeInsets.only(
                 left: 0.0, top: 1.0, right: 0.0, bottom: 1.0),
-            color: const Color(0x0fffffff),
+
             child: RaisedButton(
+              color : Color(0xff77b234),
               child: Text(
-                  'Expiration date : ${_dateTime.year}-${_dateTime.month}-${_dateTime.day}'),
+                'Expiration date      :        ${_dateTime.year}/${_dateTime.month}/${_dateTime.day}             ' ,
+                  style:TextStyle(backgroundColor: Color(0xff77b234),)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
               onPressed: _datePicker,
             ),
           ),
           RaisedButton(
+          color :  Color(0xff77b234),
             child: const Text(" Add product "),
             onPressed: _submit,
             shape: RoundedRectangleBorder(
@@ -285,7 +397,7 @@ class _AddProductPageState extends State<AddProductPage> {
             ),
             padding:
                 const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
-            color: Theme.of(context).primaryTextTheme.button.color,
+          //  color: Theme.of(context).primaryTextTheme.button.color,
           ),
 
           const SizedBox(height: 40),
