@@ -1,3 +1,4 @@
+import 'package:expiry_cart/Style/constant.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -15,7 +16,13 @@ class AddProductPage extends StatefulWidget {
 class _AddProductPageState extends State<AddProductPage> {
 // name , phone , price , quantity
 
-  String _ProductName, _description  , _Phone_Number, _Price, _discount1 , _discount2 ,  _Quantity;
+  String _ProductName,
+      _description,
+      _Phone_Number,
+      _Price,
+      _discount1,
+      _discount2,
+      _Quantity;
   static final RegExp nameRegExp = RegExp('[a-zA-Z]');
   static final RegExp numberRegExp = RegExp(r'\d');
 
@@ -48,7 +55,7 @@ class _AddProductPageState extends State<AddProductPage> {
     "Meat , Fish & Poultry",
     "Beverages",
     "Bakery & Snacks",
-    "Medicines & Persona Care"
+    "Medicines & Personal Care"
   ];
 
 // Expiration date
@@ -60,7 +67,7 @@ class _AddProductPageState extends State<AddProductPage> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
-      lastDate: DateTime(DateTime.now().year +5),
+      lastDate: DateTime(DateTime.now().year + 5),
     ).then((value) {
       if (value == null) {
         return;
@@ -76,8 +83,9 @@ class _AddProductPageState extends State<AddProductPage> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(
-        title: const Text("  Add product "),
-        backgroundColor: const Color(0xff77b234),
+        title: const Text(" Add new product ",
+            style: TextStyle(fontSize: 24, color: kGreenColor)),
+        // backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
           child: Form(
@@ -118,270 +126,308 @@ class _AddProductPageState extends State<AddProductPage> {
           ),
 
           const SizedBox(
-            height: 8,
+            height: 4,
           ),
 
 // select product
-
-          DropdownButtonFormField(
-            icon: const Icon(Icons.arrow_drop_down),
-            dropdownColor: const Color(0xFFFFFFFF),
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50))),
-            hint: const Text(
-              '   Select product type  ',
-              style: TextStyle(fontSize: 20, color: Colors.black),
-            ),
-            isExpanded: true,
-            value: ProductChosse,
-            onChanged: (newValue) {
-              setState(() {
-                ProductChosse = newValue;
-              });
-            },
-            validator:
-              (newValue) => newValue == null ? 'Please select product type ' : null,
-            items: listItem.map((valueItem) {
-              return DropdownMenuItem(
-                value: valueItem,
-                child: Text(valueItem),
-              );
-            }).toList(),
-          ),
-
-           // product name
-
-          Container(
-            color: const Color(0xFFFFFFFF),
-            margin: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                      borderSide: BorderSide(color: Colors.black)),
-                  labelText: "  Product name",
-                  labelStyle: TextStyle(fontSize: 20, color: Colors.black),
-                  prefixIcon: Icon(Icons.add_box_sharp)),
-              textAlign: TextAlign.left,
-              keyboardType: TextInputType.text,
-              validator: (value) => value.isEmpty
-                  ? 'Enter Your Name'
-                  : (nameRegExp.hasMatch(value) ? null : 'Enter a Valid Name'),
-              onSaved: (String name) {
-                _ProductName = name;
-                print(_ProductName);
-              },
-            ),
-          ),
-
-        // description
-
-          Container(
-            color: const Color(0xFFFFFFFF),
-            margin: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                      borderSide: BorderSide(color: Colors.black)),
-                  labelText: "  Product Description ",
-                  labelStyle: TextStyle(fontSize: 20, color: Colors.black),
-                  prefixIcon: Icon(Icons.short_text_rounded)),
-              textAlign: TextAlign.left,
-              keyboardType: TextInputType.text,
-              validator: (value) => value.isEmpty
-                  ? 'Enter the description '
-                  : (nameRegExp.hasMatch(value) ? null : 'Enter a Valid description'),
-              onSaved: (String des) {
-                _description = des;
-                print(_description);
-              },
-            ),
-          ),
-
-
-        // phone number
-
-          Container(
-            color: const Color(0xFFFFFFFF),
-            margin: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                prefixText: "  +963   ",
-                prefixStyle: TextStyle(color: Colors.black, fontSize: 20),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                    borderSide: BorderSide(color: Colors.black)),
-                labelText: "  phone number ",
-                labelStyle: TextStyle(fontSize: 20, color: Colors.black),
-                prefixIcon: Icon(Icons.phone),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
+            child: DropdownButtonFormField(
+              elevation: 10,
+              icon: const Icon(Icons.arrow_drop_down),
+              dropdownColor: const Color(0xFFFFFFFF),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50))),
+              hint: const Text(
+                '   Select product type',
+                style: TextStyle(fontSize: 20, color: Colors.grey),
               ),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value.length == 0) {
-                  return 'Please enter mobile number';
-                } else if (value.length != 10) {
-                  return 'Please enter valid mobile number';
-                }
-                return null;
+              isExpanded: true,
+              value: ProductChosse,
+              onChanged: (newValue) {
+                setState(() {
+                  ProductChosse = newValue;
+                });
               },
-              onSaved: (value) {
-                _Phone_Number = value;
-                print(_Phone_Number);
-              },
+              validator: (newValue) =>
+                  newValue == null ? 'Please select product type ' : null,
+              items: listItem.map((valueItem) {
+                return DropdownMenuItem(
+                  value: valueItem,
+                  child: Text(valueItem),
+                );
+              }).toList(),
+            ),
+          ),
+
+          // product name
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Container(
+              height: 55,
+              decoration: kAddDecoration,
+              margin: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: "  Product name",
+                  hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
+                  prefixIcon: Icon(
+                    Icons.add_box_sharp,
+                    color: kGreenColor,
+                  ),
+                  border: InputBorder.none,
+                ),
+                textAlign: TextAlign.left,
+                keyboardType: TextInputType.text,
+                validator: (value) => value.isEmpty
+                    ? 'Enter Your Name'
+                    : (nameRegExp.hasMatch(value)
+                        ? null
+                        : 'Enter a Valid Name'),
+                onSaved: (String name) {
+                  _ProductName = name;
+                  print(_ProductName);
+                },
+              ),
+            ),
+          ),
+
+          // description
+
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Container(
+              decoration: kAddDecoration,
+              height: 55,
+              margin: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    // enabledBorder: OutlineInputBorder(
+                    //     borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                    //     borderSide: BorderSide(color: Colors.black)),
+                    hintText: "  Product Description ",
+                    hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
+                    prefixIcon: Icon(
+                      Icons.short_text_rounded,
+                      color: kGreenColor,
+                    ),
+                    border: InputBorder.none),
+                textAlign: TextAlign.left,
+                keyboardType: TextInputType.text,
+                validator: (value) => value.isEmpty
+                    ? 'Enter the description '
+                    : (nameRegExp.hasMatch(value)
+                        ? null
+                        : 'Enter a Valid description'),
+                onSaved: (String des) {
+                  _description = des;
+                  print(_description);
+                },
+              ),
+            ),
+          ),
+
+          // phone number
+
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Container(
+              height: 55,
+              decoration: kAddDecoration,
+              margin: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    prefixText: "+963",
+                    prefixStyle: TextStyle(color: Colors.black, fontSize: 20),
+                    hintText: "phone number",
+                    hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
+                    prefixIcon: Icon(Icons.phone, color: kGreenColor),
+                    border: InputBorder.none),
+                textAlign: TextAlign.start,
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value.length == 0) {
+                    return 'Please enter mobile number';
+                  } else if (value.length != 10) {
+                    return 'Please enter valid mobile number';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _Phone_Number = value;
+                  print(_Phone_Number);
+                },
+              ),
             ),
           ),
 
 // product price
 
-          Container(
-            color: const Color(0xFFFFFFFF),
-            margin: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                      borderSide: BorderSide(color: Colors.black)),
-                  labelText: "  Product price ",
-                  labelStyle: TextStyle(fontSize: 20, color: Colors.black),
-                  prefixIcon: Icon(Icons.attach_money),
-                  suffixText: " S.P             "),
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.number,
-              validator: (String value) {
-                double _parsedValue = double.tryParse(value);
-                if (_parsedValue == null) {
-                  return "Please enter a valid price";
-                }
-                if (_parsedValue == 0.0) {
-                  return "Please enter a valid price";
-                }
-                if (double.parse(value) <= 0) {
-                  return "Please enter a valid price";
-                }
-              },
-              onSaved: (value) {
-                _Price = value;
-                print(_Price);
-              },
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Container(
+              height: 55,
+              decoration: kAddDecoration,
+              margin: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: "Product price",
+                  hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
+                  prefixIcon: Icon(Icons.attach_money, color: kGreenColor),
+                  suffixText: " S.P      ",
+                  border: InputBorder.none,
+                ),
+                textAlign: TextAlign.start,
+                keyboardType: TextInputType.number,
+                validator: (String value) {
+                  double _parsedValue = double.tryParse(value);
+                  if (_parsedValue == null) {
+                    return "Please enter a valid price";
+                  }
+                  if (_parsedValue == 0.0) {
+                    return "Please enter a valid price";
+                  }
+                  if (double.parse(value) <= 0) {
+                    return "Please enter a valid price";
+                  }
+                },
+                onSaved: (value) {
+                  _Price = value;
+                  print(_Price);
+                },
+              ),
             ),
           ),
 
-          Container(
-            color: const Color(0xFFFFFFFF),
-            margin: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                      borderSide: BorderSide(color: Colors.black)),
-                  labelText: "  30 days discount ",
-                  labelStyle: TextStyle(fontSize: 20, color: Colors.black),
-                  prefixIcon: Icon(Icons.analytics_outlined),
-                  suffixText: " %            "),
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.number,
-              validator: (String value) {
-                double _parsedValue = double.tryParse(value);
-                if (_parsedValue == null) {
-                  return "Please enter a valid discount ";
-                }
-                if (double.parse(value) <= 0) {
-                  return "Please enter a valid discount";
-                }
-                if (double.parse(value) > 100) {
-                  return "Please enter a valid discount";
-                }
-              },
-              onSaved: (value) {
-                _discount1 = value;
-                print(_discount1);
-              },
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Container(
+              height: 55,
+              decoration: kAddDecoration,
+              margin: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    hintText: "  30 days discount ",
+                    hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
+                    prefixIcon: Icon(
+                      Icons.analytics_outlined,
+                      color: kGreenColor,
+                    ),
+                    suffixText: " % ",
+                    border: InputBorder.none),
+                textAlign: TextAlign.start,
+                keyboardType: TextInputType.number,
+                validator: (String value) {
+                  double _parsedValue = double.tryParse(value);
+                  if (_parsedValue == null) {
+                    return "Please enter a valid discount ";
+                  }
+                  if (double.parse(value) <= 0) {
+                    return "Please enter a valid discount";
+                  }
+                  if (double.parse(value) > 100) {
+                    return "Please enter a valid discount";
+                  }
+                },
+                onSaved: (value) {
+                  _discount1 = value;
+                  print(_discount1);
+                },
+              ),
             ),
           ),
 // quantity
-          Container(
-            color: const Color(0xFFFFFFFF),
-            margin: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                      borderSide: BorderSide(color: Colors.black)),
-                  labelText: "  15 days discount ",
-                  labelStyle: TextStyle(fontSize: 20, color: Colors.black),
-                  prefixIcon: Icon(Icons.analytics_outlined),
-                  suffixText: " %            "),
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.number,
-              validator: (String value) {
-                double _parsedValue = double.tryParse(value);
-                if (_parsedValue == null) {
-                  return "Please enter a valid discount ";
-                }
-                if (double.parse(value) <= 0) {
-                  return "Please enter a valid discount";
-                }
-                if (double.parse(value) > 100) {
-                  return "Please enter a valid discount";
-                }
-              },
-              onSaved: (value) {
-                _discount2 = value;
-                print(_discount2);
-              },
-            ),
-          ),
-
-          Container(
-            color: const Color(0xFFFFFFFF),
-            margin: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                    borderSide: BorderSide(color: Colors.black)),
-                labelText: "  Available quantity ",
-                labelStyle: TextStyle(fontSize: 20, color: Colors.black),
-                prefixIcon: Icon(Icons.add_shopping_cart),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Container(
+              height: 55,
+              decoration: kAddDecoration,
+              margin: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: "  15 days discount ",
+                  hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
+                  prefixIcon: Icon(
+                    Icons.analytics_outlined,
+                    color: kGreenColor,
+                  ),
+                  suffixText: " %",
+                  border: InputBorder.none,
+                ),
+                textAlign: TextAlign.start,
+                keyboardType: TextInputType.number,
+                validator: (String value) {
+                  double _parsedValue = double.tryParse(value);
+                  if (_parsedValue == null) {
+                    return "Please enter a valid discount ";
+                  }
+                  if (double.parse(value) <= 0) {
+                    return "Please enter a valid discount";
+                  }
+                  if (double.parse(value) > 100) {
+                    return "Please enter a valid discount";
+                  }
+                },
+                onSaved: (value) {
+                  _discount2 = value;
+                  print(_discount2);
+                },
               ),
-              textAlign: TextAlign.left,
-              keyboardType: TextInputType.number,
-              validator: (String value) {
-                double _parsedValue = double.tryParse(value);
-                if (_parsedValue == null) {
-                  return "Please enter a valid quantity";
-                }
-                if (_parsedValue == 0.0) {
-                  return "Please enter a valid quantity";
-                }
-                if (double.parse(value) <= 0) {
-                  return "Please enter a valid quantity";
-                }
-                if (double.parse(value) > 1000) {
-                  return "Please enter a valid quantity";
-                }
-              },
-              onSaved: (value) {
-                _Quantity = value;
-                print(_Quantity);
-              },
             ),
           ),
 
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Container(
+              height: 55,
+              decoration: kAddDecoration,
+              margin: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: "  Available quantity ",
+                  hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
+                  prefixIcon: Icon(Icons.add_shopping_cart, color: kGreenColor),
+                  border: InputBorder.none,
+                ),
+                textAlign: TextAlign.start,
+                keyboardType: TextInputType.number,
+                validator: (String value) {
+                  double _parsedValue = double.tryParse(value);
+                  if (_parsedValue == null) {
+                    return "Please enter a valid quantity";
+                  }
+                  if (_parsedValue == 0.0) {
+                    return "Please enter a valid quantity";
+                  }
+                  if (double.parse(value) <= 0) {
+                    return "Please enter a valid quantity";
+                  }
+                  if (double.parse(value) > 1000) {
+                    return "Please enter a valid quantity";
+                  }
+                },
+                onSaved: (value) {
+                  _Quantity = value;
+                  print(_Quantity);
+                },
+              ),
+            ),
+          ),
 
-             // expiration date   ElevatedButton
+          // expiration date   ElevatedButton
 
           Container(
             margin: const EdgeInsets.only(
                 left: 0.0, top: 1.0, right: 0.0, bottom: 1.0),
-
             child: RaisedButton(
-              color : Color(0xff77b234),
+              color: kGreenColor,
               child: Text(
-                'Expiration date      :        ${_dateTime.year}/${_dateTime.month}/${_dateTime.day}             ' ,
-                  style:TextStyle(backgroundColor: Color(0xff77b234),)),
+                  'Expiration date  :        ${_dateTime.year}/${_dateTime.month}/${_dateTime.day}',
+                  style: const TextStyle(
+                    backgroundColor: Color(0xff77b234),
+                  )),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
@@ -389,15 +435,14 @@ class _AddProductPageState extends State<AddProductPage> {
             ),
           ),
           RaisedButton(
-          color :  Color(0xff77b234),
-            child: const Text(" Add product "),
+            color: kGreenColor,
+            child: const Text("Add product"),
             onPressed: _submit,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
             padding:
                 const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
-          //  color: Theme.of(context).primaryTextTheme.button.color,
           ),
 
           const SizedBox(height: 40),

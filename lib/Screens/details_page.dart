@@ -1,5 +1,6 @@
 import 'package:expiry_cart/Screens/add_product_page.dart';
 import 'package:expiry_cart/Style/constant.dart';
+import 'package:expiry_cart/Style/d_container.dart';
 import 'package:expiry_cart/Style/details_column.dart';
 import 'package:expiry_cart/Style/details_container.dart';
 import 'package:expiry_cart/Style/icon_press.dart';
@@ -37,7 +38,7 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
             child: Stack(children: [
               Container(
-                height: 180,
+                height: 175,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
@@ -163,53 +164,50 @@ class _DetailsPageState extends State<DetailsPage> {
                     text: 'Contact Information:',
                     icon: Icons.phone,
                     text1: '000000000'),
-                const SizedBox(height: 30),
+                const D_Container(
+                    height: 200,
+                    text: 'Description:',
+                    icon: Icons.short_text_rounded,
+                    text1: 'bla bla'),
+                const SizedBox(height: 20),
+                Container(
+                  margin: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: kGreenLightColor,
+                      borderRadius: BorderRadius.circular(25)),
+                  width: 350,
+                  height: 60,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      DetailsColumn(
+                          icon: Icons.edit,
+                          text: 'Edit',
+                          color: kGreenColor,
+                          press: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AddProductPage()));
+                          }),
+                      DetailsColumn(
+                          icon: Icons.add_comment,
+                          text: 'Comment',
+                          color: kGreenColor,
+                          press: () {}),
+                      DetailsColumn(
+                          icon: Icons.delete,
+                          text: 'Delete',
+                          color: Colors.red,
+                          press: () {}),
+                    ],
+                  ),
+                ),
               ],
             ),
           )
         ]),
-      ),
-    );
-  }
-}
-
-class D_Container extends StatelessWidget {
-  final String text;
-  final IconData icon;
-  final String text1;
-  const D_Container({
-    Key key,
-    @required this.text,
-    @required this.icon,
-    @required this.text1,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            text,
-            style: kDetailsText,
-          ),
-          DetailsContainer(
-            width: 270,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(icon, color: kGreenColor),
-                  Text(text1, style: TextStyle(fontSize: 17)),
-                ],
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -42,7 +42,7 @@ const kProductName = TextStyle(
 
 const kAppBarText = TextStyle(
   color: kGreenColor,
-  fontSize: 25,
+  fontSize: 18,
   fontWeight: FontWeight.bold,
 );
 const kProductsName = TextStyle(
@@ -61,3 +61,7 @@ const ktext = TextStyle(
   fontFamily: 'IBM Plex Sans',
 );
 
+var kAddDecoration = BoxDecoration(
+  borderRadius: BorderRadius.circular(25),
+  color: kGreenLightColor,
+);
