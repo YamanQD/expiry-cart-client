@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class Categories extends StatelessWidget {
   Categories({Key key}) : super(key: key);
-  List<Category> categories = Utils.get();
+  List<Category> categories = Utils.getCategories();
 
   @override
   Widget build(BuildContext context) {
