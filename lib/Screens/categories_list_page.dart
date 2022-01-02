@@ -118,6 +118,7 @@ class _BottomBarState extends State<BottomBar> {
                   icon: Icons.add_circle),
               IconStyle(
                   press: () {
+                    showAlertDialog(context);
                   },
                   icon: Icons.logout),
             ],
@@ -128,3 +129,37 @@ class _BottomBarState extends State<BottomBar> {
   }
 }
 
+showAlertDialog(BuildContext context) {
+  Widget cancelButton = TextButton(
+    child: const Text("No", style: TextStyle(color: Colors.grey)),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  Widget continueButton = TextButton(
+    child: const Text("Yes", style: TextStyle(color: Colors.red)),
+    onPressed: () {
+      Navigator.pop(
+          context, MaterialPageRoute(builder: (context) => const SignIn()));
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: const Text(
+      "Logout",
+      style: TextStyle(color: kGreenColor),
+    ),
+    content: const Text("Are you sure that you want to logout?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
