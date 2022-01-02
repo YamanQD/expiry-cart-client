@@ -26,6 +26,7 @@ class ProductsPage extends StatelessWidget {
             icon: const Icon(Icons.search),
             press: () {},
           ),
+          
         ],
       ),
       body: FutureBuilder(
@@ -53,7 +54,8 @@ class ProductsPage extends StatelessWidget {
                             );
                           },
                           child: Container(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.only(
+                                left: 8, right: 8, top: 8, bottom: 2),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(30),
@@ -72,8 +74,8 @@ class ProductsPage extends StatelessWidget {
                                   child: Image.network(
                                     'http://yaman.muhajreen.net:8000/images/products/${snapshot.data[index].image}',
                                     fit: BoxFit.cover,
-                                    width: 100,
-                                    height: 100,
+                                    width: 90,
+                                    height: 90,
                                   ),
                                 ),
                                 SizedBox(
@@ -87,6 +89,20 @@ class ProductsPage extends StatelessWidget {
                                   snapshot.data[index].name,
                                   style: kProductName,
                                 ),
+                                // const SizedBox(height: 10),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(snapshot.data[index].expiryDate,
+                                          style: TextStyle(color: Colors.grey)),
+                                      Text(snapshot.data[index].price,
+                                          style: TextStyle(color: Colors.grey)),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -96,14 +112,16 @@ class ProductsPage extends StatelessWidget {
                   ),
                 );
               } else {
-                return Center(
+                return const Center(
                   child: Text('No Data'),
                 );
               }
             } else {
               if (snapshot.hasError) print(snapshot.error);
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: kGreenColor,
+                ),
               );
             }
           }),

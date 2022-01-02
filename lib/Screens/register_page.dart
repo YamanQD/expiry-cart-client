@@ -162,7 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: const EdgeInsets.only(left: 84, top: 2),
                 child: Text(
                   passwordError ?? '',
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 ),
               ),
               const SizedBox(

@@ -34,8 +34,8 @@ const kCategoriesName = TextStyle(
   fontFamily: 'IBM Plex Sans',
 );
 const kProductName = TextStyle(
-  fontSize: 25,
-  color: Colors.black45,
+  fontSize: 21,
+  color: kGreenColor,
   fontWeight: FontWeight.bold,
 );
 
@@ -68,7 +68,7 @@ var kAddDecoration = BoxDecoration(
 const kEditText = TextStyle(
   color: kGreenColor,
   fontWeight: FontWeight.bold,
-  fontSize: 33, 
+  fontSize: 33,
 );
 
 var kEditDecoration = BoxDecoration(
