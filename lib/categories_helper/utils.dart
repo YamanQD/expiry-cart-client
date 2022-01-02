@@ -13,7 +13,7 @@ class Utils {
     try {
       res = await http.get(
           Uri.parse(
-              'http://yaman.muhajreen.net:8000/api/products?category=$category'),
+              'http://yaman.muhajreen.net:8000/api/products?category=${Uri.encodeComponent(category)}'),
           headers: {'Accept': 'application/json'});
     } catch (e) {
       print(e);
@@ -59,10 +59,9 @@ class Utils {
   }
 
   static List<Category> getCategories() {
-    //TODO: url ecnode before sending
     return [
       Category(
-        name: 'Canned Food',
+        name: 'Canned food',
         imgName: 'images/cat1.jpg',
       ),
       Category(
@@ -70,11 +69,11 @@ class Utils {
         imgName: 'images/cat2.jpeg',
       ),
       Category(
-        name: 'Fruits%20%26%20vegetables',
+        name: 'Fruits & vegetables',
         imgName: 'images/cat3.jpg',
       ),
       Category(
-        name: 'Meats, Fish and Poultry',
+        name: 'Meat, Fish & Poultry',
         imgName: 'images/cat4.jpg',
       ),
       Category(
@@ -82,7 +81,7 @@ class Utils {
         imgName: 'images/cat5.jpg',
       ),
       Category(
-        name: 'Bakery%20%26%20Snacks',
+        name: 'Bakery & Snacks',
         imgName: 'images/cat6.jpeg',
       ),
       Category(
