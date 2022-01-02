@@ -6,12 +6,11 @@ class D_Container extends StatelessWidget {
   final String text;
   final IconData icon;
   final String text1;
-  final double height;
   const D_Container({
     Key key,
     @required this.text,
     @required this.icon,
-    @required this.text1, this.height,
+    @required this.text1, 
   }) : super(key: key);
 
   @override

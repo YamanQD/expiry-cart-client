@@ -8,10 +8,9 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(
       MaterialApp(
-        home: AddProductPage(),
+        home: DetailsPage(productDetail: Utils.get()[0].subCategories[0]),
+        // AddProductPage(),
         // Categories(),
-        // DetailsPage(productDetail: Utils.get()[0].subCategories[0]),
-        //  DetailsPage(productDetail: Utils.get()[0].subCategories[0]),
         // SplashPage(
         //  duration: 5,
         //  navigateToPage: const WelcomePage(),

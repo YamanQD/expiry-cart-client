@@ -165,7 +165,6 @@ class _DetailsPageState extends State<DetailsPage> {
                     icon: Icons.phone,
                     text1: '000000000'),
                 const D_Container(
-                    height: 200,
                     text: 'Description:',
                     icon: Icons.short_text_rounded,
                     text1: 'bla bla'),
