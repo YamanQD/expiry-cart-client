@@ -86,6 +86,9 @@ class _AddProductPageState extends State<AddProductPage> {
         title: const Text(" Add new product ",
             style: TextStyle(fontSize: 24, color: kGreenColor)),
         // backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(
+          color: kGreenColor,
+        ),
       ),
       body: SingleChildScrollView(
           child: Form(

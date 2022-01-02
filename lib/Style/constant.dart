@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const kGreenColor = Color(0xff77b234);
@@ -64,4 +63,15 @@ const ktext = TextStyle(
 var kAddDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(25),
   color: kGreenLightColor,
+);
+
+const kEditText = TextStyle(
+  color: kGreenColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 33, 
+);
+
+var kEditDecoration = BoxDecoration(
+  borderRadius: BorderRadius.circular(25),
+  color: kGreenColor,
 );

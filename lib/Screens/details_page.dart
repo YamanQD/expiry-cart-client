@@ -1,5 +1,5 @@
+import 'package:expiry_cart/Screens/edit_product.dart';
 import 'package:expiry_cart/models/product.dart';
-import 'package:expiry_cart/Screens/add_product_page.dart';
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:expiry_cart/Style/d_container.dart';
 import 'package:expiry_cart/Style/details_column.dart';
@@ -24,9 +24,9 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Product Details',
-          style: kAppBarText,
+        title: const Text('Product Details', style: kAppBarText),
+        iconTheme: const IconThemeData(
+          color: kGreenColor,
         ),
       ),
       body: Container(
@@ -77,8 +77,8 @@ class _DetailsPageState extends State<DetailsPage> {
                       child: Column(
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsets.only(right: 12, left: 15, top: 8),
+                            padding: const EdgeInsets.only(
+                                right: 12, left: 15, top: 8),
                             child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -87,7 +87,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text('Views:',
+                                        const Text('Views:',
                                             textAlign: TextAlign.start,
                                             style: kDetailsText),
                                         DetailsContainer(
@@ -100,85 +100,18 @@ class _DetailsPageState extends State<DetailsPage> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Icon(Icons.remove_red_eye,
+                                                  const Icon(
+                                                      Icons.remove_red_eye,
                                                       color: Colors.red),
                                                   Text(
                                                     snapshot.data.views,
-                                                    style:
-                                                        TextStyle(fontSize: 17),
+                                                    style: const TextStyle(
+                                                        fontSize: 17),
                                                   ),
                                                 ]),
                                           ),
                                         ),
                                       ]),
-
-                                ),
-                              ]),
-                        ),
-                      ]),
-                ),
-                const SizedBox(height: 10),
-                const D_Container(
-                    text: 'Price:', icon: Icons.attach_money, text1: '0000'),
-                const SizedBox(height: 7),
-                const D_Container(
-                    text: 'Quantity:',
-                    icon: Icons.production_quantity_limits,
-                    text1: '0000'),
-                const SizedBox(height: 7),
-                const D_Container(
-                    text: 'Expiry Date:',
-                    icon: Icons.date_range,
-                    text1: '0000000'),
-                const SizedBox(height: 7),
-                const D_Container(
-                    text: 'Contact Information:',
-                    icon: Icons.phone,
-                    text1: '000000000'),
-                const D_Container(
-                    text: 'Description:',
-                    icon: Icons.short_text_rounded,
-                    text1: 'bla bla'),
-                const SizedBox(height: 20),
-                Container(
-                  margin: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      color: kGreenLightColor,
-                      borderRadius: BorderRadius.circular(25)),
-                  width: 350,
-                  height: 60,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      DetailsColumn(
-                          icon: Icons.edit,
-                          text: 'Edit',
-                          color: kGreenColor,
-                          press: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AddProductPage()));
-                          }),
-                      DetailsColumn(
-                          icon: Icons.add_comment,
-                          text: 'Comment',
-                          color: kGreenColor,
-                          press: () {}),
-                      DetailsColumn(
-                          icon: Icons.delete,
-                          text: 'Delete',
-                          color: Colors.red,
-                          press: () {}),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-        ]),
-
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         left: 12, right: 12),
@@ -247,7 +180,6 @@ class _DetailsPageState extends State<DetailsPage> {
                               icon: Icons.phone,
                               text1: snapshot.data.contactInfo),
                           D_Container(
-                              height: 200,
                               text: 'Description:',
                               icon: Icons.short_text_rounded,
                               text1: snapshot.data.description),
@@ -271,7 +203,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const AddProductPage()));
+                                                  const EditProductPage()));
                                     }),
                                 DetailsColumn(
                                     icon: Icons.add_comment,
@@ -282,7 +214,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                     icon: Icons.delete,
                                     text: 'Delete',
                                     color: Colors.red,
-                                    press: () {}),
+                                    press: () {
+                                      showAlertDialog(context);
+                                    }),
                               ],
                             ),
                           ),
@@ -296,10 +230,49 @@ class _DetailsPageState extends State<DetailsPage> {
                   );
                 }
               } else {
-                return const CircularProgressIndicator();
+                return const CircularProgressIndicator(
+                  color: kGreenColor,
+                );
               }
             }),
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  Widget cancelButton = TextButton(
+    child: const Text("Cancel", style: TextStyle(color: Colors.grey)),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  Widget continueButton = TextButton(
+    child: const Text("Delete", style: TextStyle(color: Colors.red)),
+    onPressed: () {
+      //     Future<void> Delete_Product(String product_name) async{
+      //   productsList.removeWhere((element) => element.product_name == product_name);
+      print(" product delete ");
+      // }
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: const Text(
+      "Delete this Product",
+      style: TextStyle(color: kGreenColor),
+    ),
+    content: const Text("Do you want to delete this product?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
