@@ -1,12 +1,12 @@
 import 'dart:convert';
 
+import 'dart:io';
 import 'package:expiry_cart/services/auth.dart';
 import 'package:expiry_cart/categories_helper/category.dart';
 import 'package:expiry_cart/models/product.dart';
 import 'package:http/http.dart' as http;
 
 class Utils {
-  // categories generator
   static Future<List<ProductSummary>> get(String category) async {
     List<ProductSummary> products = [];
     var res;
@@ -55,6 +55,49 @@ class Utils {
       }
     } else {
       throw Exception('Failed to load product');
+    }
+  }
+
+  static Future<bool> postProduct(Map<String, dynamic> prod) async {
+    try {
+      var req = http.MultipartRequest(
+          'POST', Uri.parse('http://yaman.muhajreen.net:8000/api/products'));
+      req.headers.addAll({
+        'Accept': 'application/json',
+        'Authorization':
+            'Bearer 60|oC1JwrfZwshl3ZZ4CbL20auspr2j6UsWAWfFkKHu' //TODO: get token from auth
+      });
+
+      if (prod['image'] != null && (prod['image'] as File).existsSync()) {
+        var img = http.MultipartFile.fromBytes(
+            'image', await (prod['image'] as File).readAsBytes(),
+            filename: (prod['image'] as File).path);
+        req.files.add(img);
+      }
+      Map<String, String> prodMap = {
+        'name': prod['name'],
+        'description': prod['description'],
+        'price': prod['price'].toString(),
+        'category': prod['category'],
+        'quantity': prod['quantity'].toString(),
+        'expiry_date': prod['expiry_date'].toString(),
+        'fifteen_days_discount': prod['fifteen_days_discount'].toString(),
+        'thirty_days_discount': prod['thirty_days_discount'].toString(),
+        'contact_info': prod['contact_info'],
+      };
+      req.fields.addAll(prodMap);
+
+      var res = await req.send();
+
+      if (res.statusCode == 201) {
+        return true;
+      } else {
+        print(await res.stream.bytesToString());
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 
