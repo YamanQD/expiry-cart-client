@@ -26,7 +26,6 @@ class ProductsPage extends StatelessWidget {
             icon: const Icon(Icons.search),
             press: () {},
           ),
-          
         ],
       ),
       body: FutureBuilder(
@@ -47,8 +46,7 @@ class ProductsPage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => DetailsPage(
-                                  productDetail:
-                                      Utils.getProduct(snapshot.data[index].id),
+                                  productId: snapshot.data[index].id,
                                 ),
                               ),
                             );

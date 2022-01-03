@@ -58,6 +58,30 @@ class Utils {
     }
   }
 
+  static Future<bool> vote(int id, String type) async {
+    var res;
+    try {
+      res = await http.post(
+          Uri.parse('http://yaman.muhajreen.net:8000/api/products/$id/vote'),
+          headers: {
+            'Accept': 'application/json',
+            'Authorization':
+                'Bearer 60|oC1JwrfZwshl3ZZ4CbL20auspr2j6UsWAWfFkKHu' //TODO: get token from auth
+          },
+          body: {
+            'type': type,
+          });
+
+      if (res.statusCode == 200) {
+        return true;
+      } else {
+        print(res.body);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   static Future<bool> postProduct(Map<String, dynamic> prod) async {
     try {
       var req = http.MultipartRequest(
