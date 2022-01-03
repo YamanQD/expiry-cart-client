@@ -21,12 +21,33 @@ class ProductsPage extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: kGreenColor,
         ),
-        actions: <Widget>[
+        actions: [
           IconButton(
             icon: const Icon(Icons.search),
             press: () {},
           ),
-          
+          PopupMenuButton(
+              icon: const Icon(Icons.sort),
+              itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                    PopupMenuItem(
+                      child: TextButton(
+                          child: const Text('Sort by name',
+                              style: TextStyle(color: Colors.grey)),
+                          onPressed: () {}),
+                    ),
+                    PopupMenuItem(
+                      child: TextButton(
+                          child: const Text('Sort by price',
+                              style: TextStyle(color: Colors.grey)),
+                          onPressed: () {}),
+                    ),
+                    PopupMenuItem(
+                      child: TextButton(
+                          child: const Text('Sort by date',
+                              style: TextStyle(color: Colors.grey)),
+                          onPressed: () {}),
+                    ),
+                  ]),
         ],
       ),
       body: FutureBuilder(

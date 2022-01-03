@@ -209,7 +209,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                     icon: Icons.add_comment,
                                     text: 'Comment',
                                     color: kGreenColor,
-                                    press: () {}),
+                                    press: () {
+                                      
+                                    }),
                                 DetailsColumn(
                                     icon: Icons.delete,
                                     text: 'Delete',
