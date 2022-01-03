@@ -45,6 +45,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           Container(
                             height: 175,
                             decoration: BoxDecoration(
+                              color: Colors.white,
                               image: DecorationImage(
                                 image: NetworkImage(
                                     'http://yaman.muhajreen.net:8000/images/products/${snapshot.data.image}'),

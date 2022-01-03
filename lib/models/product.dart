@@ -31,7 +31,7 @@ class ProductSummary {
         id: json["id"],
         name: json["name"],
         price: json["price"],
-        image: json["image"],
+        image: json["image"] ?? 'default.png',
         category: json["category"],
         expiryDate: DateFormat("dd/MM/yyyy")
             .format(DateTime.parse(json["expiry_date"])),
@@ -93,7 +93,7 @@ class Product {
         name: json["name"].toString(),
         price: json["price"].toString(),
         quantity: json["quantity"].toString(),
-        image: json["image"].toString(),
+        image: json["image"] ?? 'default.png',
         category: json["category"].toString(),
         expiryDate: DateFormat("dd/MM/yyyy")
             .format(DateTime.parse(json["expiry_date"])),
