@@ -206,7 +206,9 @@ class _DetailsPageState extends State<DetailsPage> {
                           D_Container(
                               text: 'Description:',
                               icon: Icons.short_text_rounded,
-                              text1: snapshot.data.description),
+                              text1: snapshot.data.description == 'null'
+                                  ? 'No description'
+                                  : snapshot.data.description),
                           const SizedBox(height: 20),
                           Container(
                             margin: const EdgeInsets.all(20),
