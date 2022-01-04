@@ -8,8 +8,9 @@ import 'package:http/http.dart' as http;
 
 class Utils {
   static String baseUrl = 'http://yaman.muhajreen.net:8000/';
+  // static String baseUrl = 'http://192.168.1.18:8000/';
   static String tok = '64|0kmhbzARSZKIEWZ5mwNoIi2Y7U8RWAd1f5B9R1EM';
-  // static String tok = '4|h5IT420wuxnbYjPN7pWwVyf74PY55XkhULjjjgAU';
+  // static String tok = '5|H4jS2F40VsEK8WEHSthW2HVbbawdjubCwzXoXwyF';
 
   static Future<List<ProductSummary>> get(String category) async {
     List<ProductSummary> products = [];
@@ -123,6 +124,39 @@ class Utils {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  static Future<bool> editProduct(int id, Map<String, String> prod) async {
+    var emptyKeys = [];
+    prod.keys.forEach((key) {
+      if (prod[key] == '') {
+        emptyKeys.add(key);
+      }
+    });
+
+    emptyKeys.forEach((element) {
+      prod.remove(element);
+    });
+
+    var res;
+    try {
+      res = await http.patch(Uri.parse('${baseUrl}api/products/$id'),
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $tok' //TODO: get token from auth
+          },
+          body: prod);
+
+      if (res.statusCode == 200) {
+        return true;
+      } else {
+        print(res.body);
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 

@@ -241,10 +241,13 @@ class _DetailsPageState extends State<DetailsPage> {
                                             color: kGreenColor,
                                             press: () {
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const EditProductPage()));
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditProductPage(
+                                                          id: snapshot.data.id),
+                                                ),
+                                              );
                                             }),
                                         DetailsColumn(
                                             icon: Icons.add_comment,
@@ -252,17 +255,17 @@ class _DetailsPageState extends State<DetailsPage> {
                                             color: kGreenColor,
                                             press: () {
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Comments(
-                                                            title: '',
-                                                            id: snapshot
-                                                                .data.id,
-                                                            commentsList:
-                                                                snapshot.data
-                                                                    .comments,
-                                                          )));
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Comments(
+                                                    title: '',
+                                                    id: snapshot.data.id,
+                                                    commentsList:
+                                                        snapshot.data.comments,
+                                                  ),
+                                                ),
+                                              );
                                             }),
                                         DetailsColumn(
                                             icon: Icons.delete,
@@ -276,37 +279,35 @@ class _DetailsPageState extends State<DetailsPage> {
                                     ));
                               } else {
                                 return Container(
-                                    margin: const EdgeInsets.all(20),
-                                    decoration: BoxDecoration(
-                                        color: kGreenLightColor,
-                                        borderRadius:
-                                            BorderRadius.circular(25)),
-                                    width: 100,
-                                    height: 60,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        DetailsColumn(
-                                            icon: Icons.add_comment,
-                                            text: 'Comment',
-                                            color: kGreenColor,
-                                            press: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Comments(
-                                                            title: '',
-                                                            id: snapshot
-                                                                .data.id,
-                                                            commentsList:
-                                                                snapshot.data
-                                                                    .comments,
-                                                          )));
-                                            }),
-                                      ],
-                                    ));
+                                  margin: const EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                      color: kGreenLightColor,
+                                      borderRadius: BorderRadius.circular(25)),
+                                  width: 100,
+                                  height: 60,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      DetailsColumn(
+                                          icon: Icons.add_comment,
+                                          text: 'Comment',
+                                          color: kGreenColor,
+                                          press: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => Comments(
+                                                  title: '',
+                                                  id: snapshot.data.id,
+                                                  commentsList:
+                                                      snapshot.data.comments,
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                    ],
+                                  ),
+                                );
                               }
                             }),
                           ],
