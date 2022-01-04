@@ -2,6 +2,7 @@
 
 import 'package:expiry_cart/Screens/sign_in_page.dart';
 import 'package:expiry_cart/Screens/success_page.dart';
+import 'package:expiry_cart/categories_helper/utils.dart';
 import 'package:expiry_cart/Style/app_icon.dart';
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:expiry_cart/Style/register.dart';
@@ -25,7 +26,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final apiUri = 'http://yaman.muhajreen.net:8000/api/';
+  final apiUri = '${Utils.baseUrl}api/';
   bool passwordVisibility = true;
   bool confirmationVisibility = true;
   final usernameController = TextEditingController();

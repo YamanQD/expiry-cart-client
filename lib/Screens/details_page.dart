@@ -22,6 +22,13 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   int userVote = 0;
+
+  @override
+  void initState() {
+    print('init ' + widget.productId.toString());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +45,7 @@ class _DetailsPageState extends State<DetailsPage> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
+                  print('uservote ' + snapshot.data.userVote);
                   userVote = int.parse(snapshot.data.userVote);
                   return Column(children: [
                     ClipRRect(
@@ -51,7 +59,7 @@ class _DetailsPageState extends State<DetailsPage> {
                               color: Colors.white,
                               image: DecorationImage(
                                 image: NetworkImage(
-                                    'http://yaman.muhajreen.net:8000/images/products/${snapshot.data.image}'),
+                                    '${Utils.baseUrl}images/products/${snapshot.data.image}'),
                                 fit: BoxFit.contain,
                               ),
                             ),
@@ -117,7 +125,6 @@ class _DetailsPageState extends State<DetailsPage> {
                                             ),
                                           ),
                                         ]),
-//////////////////////////////////////////////////////////////////////////////////////////////////
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           left: 12, right: 12),
@@ -240,13 +247,24 @@ class _DetailsPageState extends State<DetailsPage> {
                                       icon: Icons.add_comment,
                                       text: 'Comment',
                                       color: kGreenColor,
-                                      press: () {}),
+                                      press: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Comments(
+                                                      title: '',
+                                                      id: snapshot.data.id,
+                                                      commentsList: snapshot
+                                                          .data.comments,
+                                                    )));
+                                      }),
                                   DetailsColumn(
                                       icon: Icons.delete,
                                       text: 'Delete',
                                       color: Colors.red,
                                       press: () {
-                                        showAlertDialog(context);
+                                        showAlertDialog(
+                                            context, snapshot.data.id);
                                       }),
                                 ],
                               ),
@@ -272,11 +290,11 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 }
 
-showAlertDialog(BuildContext context) {
+bool showAlertDialog(BuildContext context, int productId) {
   Widget cancelButton = TextButton(
     child: const Text("Cancel", style: TextStyle(color: Colors.grey)),
     onPressed: () {
-      Navigator.pop(context);
+      Navigator.pop(context, false);
     },
   );
   Widget continueButton = TextButton(
@@ -284,7 +302,7 @@ showAlertDialog(BuildContext context) {
     onPressed: () {
       //     Future<void> Delete_Product(String product_name) async{
       //   productsList.removeWhere((element) => element.product_name == product_name);
-      print(" product delete ");
+      Navigator.pop(context, true);
       // }
     },
   );
@@ -306,5 +324,12 @@ showAlertDialog(BuildContext context) {
     builder: (BuildContext context) {
       return alert;
     },
-  );
+  ).then((accepted) => {
+        if (accepted)
+          {
+            Utils.deleteProduct(productId).then((deleted) => {
+                  if (deleted) {Navigator.pop(context)}
+                })
+          }
+      });
 }

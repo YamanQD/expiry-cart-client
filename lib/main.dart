@@ -10,10 +10,6 @@ void main() => runApp(
         // AddProductPage(),
         // EditProductPage(),
         // ProductsPage(selected: Utils.getCategories()[2]),
-        home: ProductsPage(selected: Utils.getCategories()[2]),
-
-            // Categories(),
-
         home: // ProductsPage(selected: Utils.getCategories()[2]),
             Categories(),
         // DetailsPage(productDetail: Utils.get()[0].subCategories[0]),
