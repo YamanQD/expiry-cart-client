@@ -22,6 +22,13 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   int userVote = 0;
+
+  @override
+  void initState() {
+    print('init ' + widget.productId.toString());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +45,7 @@ class _DetailsPageState extends State<DetailsPage> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
+                  print('uservote ' + snapshot.data.userVote);
                   userVote = int.parse(snapshot.data.userVote);
                   return Column(children: [
                     ClipRRect(
@@ -51,7 +59,7 @@ class _DetailsPageState extends State<DetailsPage> {
                               color: Colors.white,
                               image: DecorationImage(
                                 image: NetworkImage(
-                                    'http://yaman.muhajreen.net:8000/images/products/${snapshot.data.image}'),
+                                    '${Utils.baseUrl}images/products/${snapshot.data.image}'),
                                 fit: BoxFit.contain,
                               ),
                             ),
@@ -78,182 +86,232 @@ class _DetailsPageState extends State<DetailsPage> {
                           ),
                         ])),
                     Expanded(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                right: 12, left: 15, top: 8),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text('Views:',
-                                            textAlign: TextAlign.start,
-                                            style: kDetailsText),
-                                        DetailsContainer(
-                                          width: 150,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 12, right: 12),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  const Icon(
-                                                      Icons.remove_red_eye,
-                                                      color: Colors.red),
-                                                  Text(
-                                                    snapshot.data.views,
-                                                    style: const TextStyle(
-                                                        fontSize: 17),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                      ]),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 12, right: 12),
-                                    child: Column(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 12, left: 15, top: 8),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text('Votes:',
+                                          const Text('Views:',
                                               textAlign: TextAlign.start,
                                               style: kDetailsText),
                                           DetailsContainer(
-                                            width: 180,
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Builder(builder: (context) {
-                                                    var color = userVote == 1
-                                                        ? kGreenColor
-                                                        : Colors.grey;
-
-                                                    return IconPress(
-                                                      icon: Icons.arrow_upward,
-                                                      press: () async {
-                                                        if (await Utils.vote(
-                                                            snapshot.data.id,
-                                                            'up')) {
-                                                          setState(() {
-                                                            userVote = 1;
-                                                          });
-                                                        }
-                                                      },
-                                                      color: color,
-                                                    );
-                                                  }),
-                                                  Text(
-                                                    snapshot.data.votes,
-                                                    style: const TextStyle(
-                                                      fontSize: 17,
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 12, right: 12),
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    const Icon(
+                                                        Icons.remove_red_eye,
+                                                        color: Colors.red),
+                                                    Text(
+                                                      snapshot.data.views,
+                                                      style: const TextStyle(
+                                                          fontSize: 17),
                                                     ),
-                                                  ),
-                                                  Builder(builder: (context) {
-                                                    var color = userVote == -1
-                                                        ? Colors.red
-                                                        : Colors.grey;
-
-                                                    return IconPress(
-                                                      icon:
-                                                          Icons.arrow_downward,
-                                                      press: () async {
-                                                        if (await Utils.vote(
-                                                            snapshot.data.id,
-                                                            'down')) {
-                                                          setState(() {
-                                                            userVote = -1;
-                                                          });
-                                                        }
-                                                      },
-                                                      color: color,
-                                                    );
-                                                  }),
-                                                ]),
+                                                  ]),
+                                            ),
                                           ),
                                         ]),
-                                  ),
-                                ]),
-                          ),
-                          const SizedBox(height: 10),
-                          D_Container(
-                              text: 'Price:',
-                              icon: Icons.attach_money,
-                              text1: snapshot.data.price),
-                          const SizedBox(height: 7),
-                          D_Container(
-                              text: 'Quantity:',
-                              icon: Icons.production_quantity_limits,
-                              text1: snapshot.data.quantity),
-                          const SizedBox(height: 7),
-                          D_Container(
-                              text: 'Expiry Date:',
-                              icon: Icons.date_range,
-                              text1: snapshot.data.expiryDate),
-                          const SizedBox(height: 7),
-                          D_Container(
-                              text: 'Contact Information:',
-                              icon: Icons.phone,
-                              text1: snapshot.data.contactInfo),
-                          D_Container(
-                              text: 'Description:',
-                              icon: Icons.short_text_rounded,
-                              text1: snapshot.data.description == 'null'
-                                  ? 'No description'
-                                  : snapshot.data.description),
-                          const SizedBox(height: 20),
-                          Container(
-                            margin: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                color: kGreenLightColor,
-                                borderRadius: BorderRadius.circular(25)),
-                            width: 350,
-                            height: 60,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                DetailsColumn(
-                                    icon: Icons.edit,
-                                    text: 'Edit',
-                                    color: kGreenColor,
-                                    press: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const EditProductPage()));
-                                    }),
-                                DetailsColumn(
-                                    icon: Icons.add_comment,
-                                    text: 'Comment',
-                                    color: kGreenColor,
-                                    press: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Comments(title: '')));
-                                    }),
-                                DetailsColumn(
-                                    icon: Icons.delete,
-                                    text: 'Delete',
-                                    color: Colors.red,
-                                    press: () {
-                                      showAlertDialog(context);
-                                    }),
-                              ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 12, right: 12),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Text('Votes:',
+                                                textAlign: TextAlign.start,
+                                                style: kDetailsText),
+                                            DetailsContainer(
+                                              width: 180,
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Builder(builder: (context) {
+                                                      var color = userVote == 1
+                                                          ? kGreenColor
+                                                          : Colors.grey;
+
+                                                      return IconPress(
+                                                        icon:
+                                                            Icons.arrow_upward,
+                                                        press: () async {
+                                                          if (await Utils.vote(
+                                                              snapshot.data.id,
+                                                              'up')) {
+                                                            setState(() {
+                                                              userVote = 1;
+                                                            });
+                                                          }
+                                                        },
+                                                        color: color,
+                                                      );
+                                                    }),
+                                                    Text(
+                                                      snapshot.data.votes,
+                                                      style: const TextStyle(
+                                                        fontSize: 17,
+                                                      ),
+                                                    ),
+                                                    Builder(builder: (context) {
+                                                      var color = userVote == -1
+                                                          ? Colors.red
+                                                          : Colors.grey;
+
+                                                      return IconPress(
+                                                        icon: Icons
+                                                            .arrow_downward,
+                                                        press: () async {
+                                                          if (await Utils.vote(
+                                                              snapshot.data.id,
+                                                              'down')) {
+                                                            setState(() {
+                                                              userVote = -1;
+                                                            });
+                                                          }
+                                                        },
+                                                        color: color,
+                                                      );
+                                                    }),
+                                                  ]),
+                                            ),
+                                          ]),
+                                    ),
+                                  ]),
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 10),
+                            D_Container(
+                                text: 'Price:',
+                                icon: Icons.attach_money,
+                                text1: snapshot.data.price),
+                            const SizedBox(height: 7),
+                            D_Container(
+                                text: 'Quantity:',
+                                icon: Icons.production_quantity_limits,
+                                text1: snapshot.data.quantity),
+                            const SizedBox(height: 7),
+                            D_Container(
+                                text: 'Expiry Date:',
+                                icon: Icons.date_range,
+                                text1: snapshot.data.expiryDate),
+                            const SizedBox(height: 7),
+                            D_Container(
+                                text: 'Contact Information:',
+                                icon: Icons.phone,
+                                text1: snapshot.data.contactInfo),
+                            D_Container(
+                                text: 'Description:',
+                                icon: Icons.short_text_rounded,
+                                text1: snapshot.data.description == 'null'
+                                    ? 'No description '
+                                    : snapshot.data.description),
+                            const SizedBox(height: 20),
+                            Builder(builder: (context) {
+                              if (snapshot.data.isOwner == 'true') {
+                                return Container(
+                                    margin: const EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                        color: kGreenLightColor,
+                                        borderRadius:
+                                            BorderRadius.circular(25)),
+                                    width: 350,
+                                    height: 60,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        DetailsColumn(
+                                            icon: Icons.edit,
+                                            text: 'Edit',
+                                            color: kGreenColor,
+                                            press: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditProductPage(
+                                                          id: snapshot.data.id),
+                                                ),
+                                              );
+                                            }),
+                                        DetailsColumn(
+                                            icon: Icons.add_comment,
+                                            text: 'Comment',
+                                            color: kGreenColor,
+                                            press: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Comments(
+                                                    title: '',
+                                                    id: snapshot.data.id,
+                                                    commentsList:
+                                                        snapshot.data.comments,
+                                                  ),
+                                                ),
+                                              );
+                                            }),
+                                        DetailsColumn(
+                                            icon: Icons.delete,
+                                            text: 'Delete',
+                                            color: Colors.red,
+                                            press: () {
+                                              showAlertDialog(
+                                                  context, snapshot.data.id);
+                                            }),
+                                      ],
+                                    ));
+                              } else {
+                                return Container(
+                                  margin: const EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                      color: kGreenLightColor,
+                                      borderRadius: BorderRadius.circular(25)),
+                                  width: 100,
+                                  height: 60,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      DetailsColumn(
+                                          icon: Icons.add_comment,
+                                          text: 'Comment',
+                                          color: kGreenColor,
+                                          press: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => Comments(
+                                                  title: '',
+                                                  id: snapshot.data.id,
+                                                  commentsList:
+                                                      snapshot.data.comments,
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                    ],
+                                  ),
+                                );
+                              }
+                            }),
+                          ],
+                        ),
                       ),
                     )
                   ]);
@@ -273,11 +331,11 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 }
 
-showAlertDialog(BuildContext context) {
+bool showAlertDialog(BuildContext context, int productId) {
   Widget cancelButton = TextButton(
     child: const Text("Cancel", style: TextStyle(color: Colors.grey)),
     onPressed: () {
-      Navigator.pop(context);
+      Navigator.pop(context, false);
     },
   );
   Widget continueButton = TextButton(
@@ -285,7 +343,7 @@ showAlertDialog(BuildContext context) {
     onPressed: () {
       //     Future<void> Delete_Product(String product_name) async{
       //   productsList.removeWhere((element) => element.product_name == product_name);
-      print(" product delete ");
+      Navigator.pop(context, true);
       // }
     },
   );
@@ -307,5 +365,12 @@ showAlertDialog(BuildContext context) {
     builder: (BuildContext context) {
       return alert;
     },
-  );
+  ).then((accepted) => {
+        if (accepted)
+          {
+            Utils.deleteProduct(productId).then((deleted) => {
+                  if (deleted) {Navigator.pop(context)}
+                })
+          }
+      });
 }

@@ -9,10 +9,14 @@ void main() => runApp(
       MaterialApp(
         // AddProductPage(),
         // EditProductPage(),
+
         home: ProductsPage(selected: Utils.getCategories()[2]),
 
         // Categories(),
 
+
+        // ProductsPage(selected: Utils.getCategories()[2]),
+        
         // DetailsPage(productDetail: Utils.get()[0].subCategories[0]),
         //  DetailsPage(productDetail: Utils.get()[0].subCategories[0]),
         // SplashPage(

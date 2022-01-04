@@ -64,7 +64,7 @@ class Product {
     this.contactInfo,
     this.votes,
     this.views,
-    this.owner,
+    this.isOwner,
     this.userVote,
     this.comments,
   });
@@ -80,7 +80,7 @@ class Product {
   final String contactInfo;
   final String votes;
   final String views;
-  final Owner owner;
+  final String isOwner;
   final String userVote;
   final List<Comment> comments;
 
@@ -101,7 +101,7 @@ class Product {
         contactInfo: json["contact_info"].toString(),
         votes: json["votes"].toString(),
         views: json["views"].toString(),
-        owner: Owner.fromJson(json["owner"]),
+        isOwner: json["is_owner"].toString(),
         userVote: json["user_vote"].toString(),
         comments: List<Comment>.from(
             json["comments"].map((x) => Comment.fromJson(x))),
@@ -119,7 +119,7 @@ class Product {
         "contact_info": contactInfo,
         "votes": votes,
         "views": views,
-        "owner": owner.toJson(),
+        "is_owner": isOwner,
         "user_vote": userVote,
         "comments": List<dynamic>.from(comments.map((x) => x.toJson())),
       };
@@ -134,7 +134,7 @@ class Comment {
 
   final int id;
   final String body;
-  final Owner owner;
+  final String owner;
 
   factory Comment.fromRawJson(String str) => Comment.fromJson(json.decode(str));
 
@@ -143,36 +143,12 @@ class Comment {
   factory Comment.fromJson(Map<String, dynamic> json) => Comment(
         id: json["id"],
         body: json["body"].toString(),
-        owner: Owner.fromJson(json["owner"]),
+        owner: json["owner"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "body": body,
-        "owner": owner.toJson(),
-      };
-}
-
-class Owner {
-  Owner({
-    this.id,
-    this.name,
-  });
-
-  final int id;
-  final String name;
-
-  factory Owner.fromRawJson(String str) => Owner.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory Owner.fromJson(Map<String, dynamic> json) => Owner(
-        id: json["id"],
-        name: json["name"].toString(),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
+        "owner": owner,
       };
 }

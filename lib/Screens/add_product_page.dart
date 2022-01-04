@@ -229,11 +229,6 @@ class _AddProductPageState extends State<AddProductPage> {
                         border: InputBorder.none),
                     textAlign: TextAlign.left,
                     keyboardType: TextInputType.text,
-                    validator: (value) => value.isEmpty
-                        ? 'Enter the description '
-                        : (nameRegExp.hasMatch(value)
-                            ? null
-                            : 'Enter a Valid description'),
                     controller: descriptionController,
                   ),
                 ),

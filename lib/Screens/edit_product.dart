@@ -1,14 +1,28 @@
 import 'package:expiry_cart/Style/constant.dart';
+import 'package:expiry_cart/categories_helper/utils.dart';
 import 'package:flutter/material.dart';
 
 class EditProductPage extends StatefulWidget {
-  const EditProductPage({Key key}) : super(key: key);
+  int id;
+  EditProductPage({Key key, @required this.id}) : super(key: key);
 
   @override
   State<EditProductPage> createState() => _EditProductPageState();
 }
 
 class _EditProductPageState extends State<EditProductPage> {
+  final _quantityController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+
+  @override
+  void dispose() {
+    _quantityController.dispose();
+    _phoneNumberController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +46,7 @@ class _EditProductPageState extends State<EditProductPage> {
                 height: 55,
                 margin: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: _descriptionController,
                   decoration: const InputDecoration(
                       hintText: "  Product Description ",
                       hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
@@ -53,6 +68,7 @@ class _EditProductPageState extends State<EditProductPage> {
                 decoration: kAddDecoration,
                 margin: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: _quantityController,
                   decoration: const InputDecoration(
                     hintText: "  Available quantity ",
                     hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
@@ -73,6 +89,7 @@ class _EditProductPageState extends State<EditProductPage> {
                 decoration: kAddDecoration,
                 margin: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: _phoneNumberController,
                   decoration: const InputDecoration(
                       prefixText: "+963",
                       prefixStyle: TextStyle(color: Colors.black, fontSize: 20),
@@ -91,8 +108,15 @@ class _EditProductPageState extends State<EditProductPage> {
                 width: 180,
                 decoration: kEditDecoration,
                 child: TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
+                    onPressed: () async {
+                      if (await Utils.editProduct(widget.id, {
+                        'description': _descriptionController.text,
+                        'quantity': _quantityController.text,
+                        'contact_info': _phoneNumberController.text,
+                      })) {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      }
                     },
                     child: const Text(
                       'Edit',

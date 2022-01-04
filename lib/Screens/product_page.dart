@@ -6,17 +6,26 @@ import 'package:expiry_cart/categories_helper/category.dart';
 import 'package:expiry_cart/categories_helper/utils.dart';
 import 'package:flutter/material.dart';
 
-class ProductsPage extends StatelessWidget {
+class ProductsPage extends StatefulWidget {
   final Category selected;
 
   const ProductsPage({Key key, @required this.selected}) : super(key: key);
+
+  @override
+  State<ProductsPage> createState() => _ProductsPageState();
+}
+
+class _ProductsPageState extends State<ProductsPage> {
+  Future<void> _reload() async {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          selected.name + ' ' + 'Category',
+          widget.selected.name + ' ' + 'Category',
           style: kAppBarText,
         ),
         iconTheme: const IconThemeData(
@@ -24,6 +33,7 @@ class ProductsPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
+
               onPressed: () {
                 Navigator.push(
                     context,
@@ -31,6 +41,10 @@ class ProductsPage extends StatelessWidget {
                         builder: (context) => const SearchView()));
               },
               icon: const Icon(Icons.search)),
+            icon: const Icon(Icons.search),
+            press: () {},
+          ),
+
           PopupMenuButton(
               icon: const Icon(Icons.sort),
               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
@@ -54,60 +68,66 @@ class ProductsPage extends StatelessWidget {
                     ),
                   ]),
         ],
-      ),
+      
       body: FutureBuilder(
-          future: Utils.get(selected.name),
+          future: Utils.get(widget.selected.name),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
-                return GridView.count(
-                  crossAxisCount: 2,
-                  children: List.generate(
-                    (snapshot.data as List).length,
-                    (index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailsPage(
-                                  productId: snapshot.data[index].id,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.only(
-                                left: 8, right: 8, top: 8, bottom: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 3,
-                                  blurRadius: 5,
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ClipOval(
-                                  child: Image.network(
-                                    'http://yaman.muhajreen.net:8000/images/products/${snapshot.data[index].image}',
-                                    fit: BoxFit.cover,
-                                    width: 90,
-                                    height: 90,
+                return RefreshIndicator(
+                  onRefresh: _reload,
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    children: List.generate(
+                      (snapshot.data as List).length,
+                      (index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: TextButton(
+                            onPressed: () {
+                              print('asfassa' +
+                                  snapshot.data[index].id.toString());
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailsPage(
+                                    productId: snapshot.data[index].id,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 10.0,
-                                  width: 150.0,
-                                  child: Divider(
-                                    color: Colors.grey.shade400,
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.only(
+                                  left: 8, right: 8, top: 8, bottom: 2),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    spreadRadius: 3,
+                                    blurRadius: 5,
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ClipOval(
+                                    child: Image.network(
+                                      '${Utils.baseUrl}images/products/${snapshot.data[index].image}',
+                                      fit: BoxFit.cover,
+                                      width: 90,
+                                      height: 90,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                    width: 150.0,
+                                    child: Divider(
+                                      color: Colors.grey.shade400,
+                                    ),
                                   ),
                                 ),
                                 Text(
@@ -128,14 +148,35 @@ class ProductsPage extends StatelessWidget {
                                           style: const TextStyle(
                                               color: Colors.grey)),
                                     ],
+
+                                  Text(
+                                    snapshot.data[index].name,
+                                    style: kProductName,
+
                                   ),
-                                ),
-                              ],
+                                  // const SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(snapshot.data[index].expiryDate,
+                                            style:
+                                                TextStyle(color: Colors.grey)),
+                                        Text(snapshot.data[index].price,
+                                            style:
+                                                TextStyle(color: Colors.grey)),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 );
               } else {
