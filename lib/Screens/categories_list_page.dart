@@ -140,8 +140,11 @@ showAlertDialog(BuildContext context) {
   Widget continueButton = TextButton(
     child: const Text("Yes", style: TextStyle(color: Colors.red)),
     onPressed: () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const SignIn()));
+      Utils.logOut();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const SignIn()),
+          (route) => false);
     },
   );
 

@@ -16,7 +16,7 @@ class Auth {
   static const storage = FlutterSecureStorage();
 
   static Future<bool> login({Map creds}) async {
-    print(creds);
+    print(creds.toString());
 
     try {
       var res = await http.post(Uri.parse('${Utils.baseUrl}api/login'),
@@ -53,12 +53,12 @@ class Auth {
           _user = User.fromRawJson(res.body);
           _token = token;
           storeToken(token: token);
-          print('t  ' + _token);
+          print('t  ' + _token.toString());
           return true;
         }
         return false;
       } catch (e) {
-        print(e);
+        print(e.toString());
         return false;
       }
     }
@@ -76,7 +76,7 @@ class Auth {
       print('after2 ' + _token.toString());
       return true;
     }
-    print('after3 ' + _token);
+    print('after3 ' + _token.toString());
     return false;
   }
 
@@ -88,7 +88,7 @@ class Auth {
       });
       cleanUp();
     } catch (e) {
-      print(e);
+      print(e.toString());
     }
   }
 

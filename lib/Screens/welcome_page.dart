@@ -53,7 +53,7 @@ class WelcomePage extends StatelessWidget {
                     height: 40,
                   ),
                   TextButtonStyle(
-                    text: 'Sign In',
+                    text: 'Get Started',
                     press: () async {
                       if (await Auth.useTokenFromStorage()) {
                         Navigator.push(

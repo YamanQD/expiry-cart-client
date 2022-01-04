@@ -222,6 +222,10 @@ class Utils {
     }
   }
 
+  static void logOut() {
+    Auth.logout();
+  }
+
   static List<Category> getCategories() {
     return [
       Category(
