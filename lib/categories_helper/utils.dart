@@ -8,10 +8,10 @@ import 'package:expiry_cart/models/product.dart';
 import 'package:http/http.dart' as http;
 
 class Utils {
-  // static String baseUrl = 'http://yaman.muhajreen.net:8000/';
-  static String baseUrl = 'http://192.168.1.18:8000/';
+  static String baseUrl = 'http://yaman.muhajreen.net:8000/';
+  // static String baseUrl = 'http://192.168.1.18:8000/';
   // static String tok = '64|0kmhbzARSZKIEWZ5mwNoIi2Y7U8RWAd1f5B9R1EM';
-  static String tok = '1|dZh21DV9Aww0gy5OwtoCcvMeX89qLXyUAEhT7pKU';
+  // static String tok = '1|dZh21DV9Aww0gy5OwtoCcvMeX89qLXyUAEhT7pKU';
 
   static Future<List<ProductSummary>> get(String category,
       {sortOptions sortBy, String searchTerm}) async {
@@ -55,11 +55,12 @@ class Utils {
   }
 
   static Future<Product> getProduct(int id) async {
+    print(Auth.token);
     var res;
     try {
       res = await http.get(Uri.parse('${baseUrl}api/products/$id'), headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $tok' //TODO: get token from auth
+        'Authorization': 'Bearer ${Auth.token}'
       });
     } catch (e) {
       print(e);
@@ -83,7 +84,7 @@ class Utils {
         Uri.parse('${baseUrl}api/products/$id'),
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer $tok' //TODO: get token from auth
+          'Authorization': 'Bearer ${Auth.token}'
         },
       );
 
@@ -105,7 +106,7 @@ class Utils {
       res = await http
           .post(Uri.parse('${baseUrl}api/products/$id/comments'), headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $tok' //TODO: get token from auth
+        'Authorization': 'Bearer ${Auth.token}'
       }, body: {
         'body': comment,
       });
@@ -128,7 +129,7 @@ class Utils {
       res = await http
           .post(Uri.parse('${baseUrl}api/products/$id/vote'), headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $tok' //TODO: get token from auth
+        'Authorization': 'Bearer ${Auth.token}'
       }, body: {
         'type': type,
       });
@@ -160,7 +161,7 @@ class Utils {
       res = await http.patch(Uri.parse('${baseUrl}api/products/$id'),
           headers: {
             'Accept': 'application/json',
-            'Authorization': 'Bearer $tok' //TODO: get token from auth
+            'Authorization': 'Bearer ${Auth.token}'
           },
           body: prod);
 
@@ -182,7 +183,7 @@ class Utils {
           http.MultipartRequest('POST', Uri.parse('${baseUrl}api/products'));
       req.headers.addAll({
         'Accept': 'application/json',
-        'Authorization': 'Bearer $tok' //TODO: get token from auth
+        'Authorization': 'Bearer ${Auth.token}'
       });
 
       if (prod['image'] != null && (prod['image'] as File).existsSync()) {

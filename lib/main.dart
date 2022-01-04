@@ -3,7 +3,7 @@ import 'package:expiry_cart/Screens/product_page.dart';
 import 'package:expiry_cart/categories_helper/utils.dart';
 // import 'package:expiry_cart/Screens/splash_page.dart';
 import 'package:flutter/material.dart';
-// import 'package:expiry_cart/Screens/welcome_page.dart';
+import 'package:expiry_cart/Screens/welcome_page.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -11,7 +11,8 @@ void main() => runApp(
         // EditProductPage(),
         // ProductsPage(selected: Utils.getCategories()[2]),
         home: // ProductsPage(selected: Utils.getCategories()[2]),
-            Categories(),
+            const WelcomePage(),
+        // Categories(),
         // DetailsPage(productDetail: Utils.get()[0].subCategories[0]),
         //  DetailsPage(productDetail: Utils.get()[0].subCategories[0]),
         // SplashPage(

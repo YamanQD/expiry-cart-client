@@ -16,6 +16,7 @@ class Categories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Categories',
           style: kTextStyle,
@@ -139,7 +140,7 @@ showAlertDialog(BuildContext context) {
   Widget continueButton = TextButton(
     child: const Text("Yes", style: TextStyle(color: Colors.red)),
     onPressed: () {
-      Navigator.pop(
+      Navigator.push(
           context, MaterialPageRoute(builder: (context) => const SignIn()));
     },
   );
