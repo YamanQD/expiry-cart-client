@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:expiry_cart/services/auth.dart';
-import 'package:expiry_cart/Screens/success_page.dart';
+import 'package:expiry_cart/Screens/login_success_page.dart';
 import 'package:expiry_cart/Screens/register_page.dart';
 import 'package:expiry_cart/Style/app_icon.dart';
 import 'package:expiry_cart/Style/constant.dart';
@@ -97,11 +97,12 @@ class _SignInState extends State<SignIn> {
                   });
                   print(isSuccess);
                   if (isSuccess) {
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SuccessPage(),
+                        builder: (context) => const LoginSuccessPage(),
                       ),
+                      (route) => false,
                     );
                   }
                 },

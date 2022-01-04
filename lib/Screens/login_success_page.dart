@@ -4,8 +4,8 @@ import 'package:expiry_cart/Style/text_button_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-class SuccessPage extends StatelessWidget {
-  const SuccessPage({Key key}) : super(key: key);
+class LoginSuccessPage extends StatelessWidget {
+  const LoginSuccessPage({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,8 +43,10 @@ class SuccessPage extends StatelessWidget {
           TextButtonStyle(
             text: 'Get Started',
             press: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Categories()));
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => Categories()),
+                  (route) => false);
             },
           ),
         ],

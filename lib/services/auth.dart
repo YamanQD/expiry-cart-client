@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:expiry_cart/models/user.dart';
+import 'package:expiry_cart/categories_helper/utils.dart';
 import 'dart:convert';
 
 class Auth {
@@ -15,11 +16,10 @@ class Auth {
   static const storage = FlutterSecureStorage();
 
   static Future<bool> login({Map creds}) async {
-    print(creds);
+    print(creds.toString());
 
     try {
-      var res = await http.post(
-          Uri.parse('http://yaman.muhajreen.net:8000/api/login'),
+      var res = await http.post(Uri.parse('${Utils.baseUrl}api/login'),
           body: jsonEncode(creds),
           headers: {
             'Content-Type': 'application/json',
@@ -43,8 +43,7 @@ class Auth {
       return false;
     } else {
       try {
-        var res = await http.get(
-            Uri.parse('http://yaman.muhajreen.net:8000/api/user'),
+        var res = await http.get(Uri.parse('${Utils.baseUrl}api/user'),
             headers: {
               'Accept': 'application/json',
               'Authorization': 'Bearer $token'
@@ -54,12 +53,12 @@ class Auth {
           _user = User.fromRawJson(res.body);
           _token = token;
           storeToken(token: token);
-          print(_user);
+          print('t  ' + _token.toString());
           return true;
         }
         return false;
       } catch (e) {
-        print(e);
+        print(e.toString());
         return false;
       }
     }
@@ -70,23 +69,26 @@ class Auth {
   }
 
   static Future<bool> useTokenFromStorage() async {
+    print('before ' + _token.toString());
     _token = await storage.read(key: 'token');
+    print('after1 ' + _token.toString());
     if (await tryToken(token: _token)) {
+      print('after2 ' + _token.toString());
       return true;
     }
+    print('after3 ' + _token.toString());
     return false;
   }
 
   static void logout() async {
     try {
-      await http.post(Uri.parse('http://yaman.muhajreen.net:8000/api/logout'),
-          headers: {
-            'Authorization': 'Bearer $_token',
-            'Accept': 'application/json'
-          });
+      await http.post(Uri.parse('${Utils.baseUrl}api/logout'), headers: {
+        'Authorization': 'Bearer $_token',
+        'Accept': 'application/json'
+      });
       cleanUp();
     } catch (e) {
-      print(e);
+      print(e.toString());
     }
   }
 
