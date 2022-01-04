@@ -221,54 +221,94 @@ class _DetailsPageState extends State<DetailsPage> {
                                     ? 'No description '
                                     : snapshot.data.description),
                             const SizedBox(height: 20),
-                            Container(
-                              margin: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                  color: kGreenLightColor,
-                                  borderRadius: BorderRadius.circular(25)),
-                              width: 350,
-                              height: 60,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  DetailsColumn(
-                                      icon: Icons.edit,
-                                      text: 'Edit',
-                                      color: kGreenColor,
-                                      press: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const EditProductPage()));
-                                      }),
-                                  DetailsColumn(
-                                      icon: Icons.add_comment,
-                                      text: 'Comment',
-                                      color: kGreenColor,
-                                      press: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Comments(
-                                                      title: '',
-                                                      id: snapshot.data.id,
-                                                      commentsList: snapshot
-                                                          .data.comments,
-                                                    )));
-                                      }),
-                                  DetailsColumn(
-                                      icon: Icons.delete,
-                                      text: 'Delete',
-                                      color: Colors.red,
-                                      press: () {
-                                        showAlertDialog(
-                                            context, snapshot.data.id);
-                                      }),
-                                ],
-                              ),
-                            ),
+                            Builder(builder: (context) {
+                              if (snapshot.data.isOwner == 'true') {
+                                return Container(
+                                    margin: const EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                        color: kGreenLightColor,
+                                        borderRadius:
+                                            BorderRadius.circular(25)),
+                                    width: 350,
+                                    height: 60,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        DetailsColumn(
+                                            icon: Icons.edit,
+                                            text: 'Edit',
+                                            color: kGreenColor,
+                                            press: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const EditProductPage()));
+                                            }),
+                                        DetailsColumn(
+                                            icon: Icons.add_comment,
+                                            text: 'Comment',
+                                            color: kGreenColor,
+                                            press: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Comments(
+                                                            title: '',
+                                                            id: snapshot
+                                                                .data.id,
+                                                            commentsList:
+                                                                snapshot.data
+                                                                    .comments,
+                                                          )));
+                                            }),
+                                        DetailsColumn(
+                                            icon: Icons.delete,
+                                            text: 'Delete',
+                                            color: Colors.red,
+                                            press: () {
+                                              showAlertDialog(
+                                                  context, snapshot.data.id);
+                                            }),
+                                      ],
+                                    ));
+                              } else {
+                                return Container(
+                                    margin: const EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                        color: kGreenLightColor,
+                                        borderRadius:
+                                            BorderRadius.circular(25)),
+                                    width: 100,
+                                    height: 60,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        DetailsColumn(
+                                            icon: Icons.add_comment,
+                                            text: 'Comment',
+                                            color: kGreenColor,
+                                            press: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Comments(
+                                                            title: '',
+                                                            id: snapshot
+                                                                .data.id,
+                                                            commentsList:
+                                                                snapshot.data
+                                                                    .comments,
+                                                          )));
+                                            }),
+                                      ],
+                                    ));
+                              }
+                            }),
                           ],
                         ),
                       ),
