@@ -1,4 +1,3 @@
-import 'package:expiry_cart/Screens/search.dart';
 import 'package:expiry_cart/models/product.dart';
 import 'package:expiry_cart/Screens/details_page.dart';
 import 'package:expiry_cart/Style/constant.dart';
@@ -9,7 +8,7 @@ import 'package:flutter/material.dart';
 class ProductsPage extends StatefulWidget {
   final Category selected;
 
-  const ProductsPage({Key key, @required this.selected}) : super(key: key);
+  ProductsPage({Key key, @required this.selected}) : super(key: key);
 
   @override
   State<ProductsPage> createState() => _ProductsPageState();
@@ -33,18 +32,9 @@ class _ProductsPageState extends State<ProductsPage> {
         ),
         actions: [
           IconButton(
-
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SearchView()));
-              },
-              icon: const Icon(Icons.search)),
             icon: const Icon(Icons.search),
             press: () {},
           ),
-
           PopupMenuButton(
               icon: const Icon(Icons.sort),
               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
@@ -68,7 +58,7 @@ class _ProductsPageState extends State<ProductsPage> {
                     ),
                   ]),
         ],
-      
+      ),
       body: FutureBuilder(
           future: Utils.get(widget.selected.name),
           builder: (context, snapshot) {
@@ -129,32 +119,10 @@ class _ProductsPageState extends State<ProductsPage> {
                                       color: Colors.grey.shade400,
                                     ),
                                   ),
-                                ),
-                                Text(
-                                  snapshot.data[index].name,
-                                  style: kProductName,
-                                ),
-                                // const SizedBox(height: 10),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(snapshot.data[index].expiryDate,
-                                          style: const TextStyle(
-                                              color: Colors.grey)),
-                                      Text(snapshot.data[index].price,
-                                          style: const TextStyle(
-                                              color: Colors.grey)),
-                                    ],
-
                                   Text(
                                     snapshot.data[index].name,
                                     style: kProductName,
-
                                   ),
-                                  // const SizedBox(height: 10),
                                   Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: Row(
@@ -193,6 +161,30 @@ class _ProductsPageState extends State<ProductsPage> {
               );
             }
           }),
+    );
+  }
+}
+
+class IconButton extends StatelessWidget {
+  final Widget icon;
+  final Function press;
+  const IconButton({
+    Key key,
+    @required this.icon,
+    @required this.press,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      shape: const CircleBorder(),
+      constraints: const BoxConstraints.tightFor(
+        width: 30,
+        height: 30,
+      ),
+      fillColor: Colors.white,
+      child: icon,
+      onPressed: press,
     );
   }
 }
