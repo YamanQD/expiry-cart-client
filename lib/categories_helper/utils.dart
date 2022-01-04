@@ -1,29 +1,45 @@
 import 'dart:convert';
 
 import 'dart:io';
+import 'package:expiry_cart/Screens/product_page.dart';
 import 'package:expiry_cart/services/auth.dart';
 import 'package:expiry_cart/categories_helper/category.dart';
 import 'package:expiry_cart/models/product.dart';
 import 'package:http/http.dart' as http;
 
 class Utils {
-  static String baseUrl = 'http://yaman.muhajreen.net:8000/';
-  // static String baseUrl = 'http://192.168.1.18:8000/';
-  static String tok = '64|0kmhbzARSZKIEWZ5mwNoIi2Y7U8RWAd1f5B9R1EM';
-  // static String tok = '5|H4jS2F40VsEK8WEHSthW2HVbbawdjubCwzXoXwyF';
+  // static String baseUrl = 'http://yaman.muhajreen.net:8000/';
+  static String baseUrl = 'http://192.168.1.18:8000/';
+  // static String tok = '64|0kmhbzARSZKIEWZ5mwNoIi2Y7U8RWAd1f5B9R1EM';
+  static String tok = '1|dZh21DV9Aww0gy5OwtoCcvMeX89qLXyUAEhT7pKU';
 
-  static Future<List<ProductSummary>> get(String category) async {
+  static Future<List<ProductSummary>> get(String category,
+      {sortOptions sortBy, String searchTerm}) async {
     List<ProductSummary> products = [];
+
+    var url =
+        '${baseUrl}api/products?category=${Uri.encodeComponent(category)}';
+    if (searchTerm != null) {
+      url += '&search=${Uri.encodeComponent(searchTerm)}';
+    }
+    if (sortBy != null) {
+      if (sortBy == sortOptions.price) {
+        url += '&sort=price';
+      } else if (sortBy == sortOptions.name) {
+        url += '&sort=name';
+      } else if (sortBy == sortOptions.expiryDate) {
+        url += '&sort=expiry_date';
+      }
+    }
+
     var res;
     try {
-      res = await http.get(
-          Uri.parse(
-              '${baseUrl}api/products?category=${Uri.encodeComponent(category)}'),
-          headers: {'Accept': 'application/json'});
+      res = await http
+          .get(Uri.parse(url), headers: {'Accept': 'application/json'});
     } catch (e) {
       print(e);
     }
-
+    print(res.body);
     if (res.statusCode == 200) {
       try {
         (jsonDecode(res.body) as List).forEach((element) {

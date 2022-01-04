@@ -14,7 +14,11 @@ class ProductsPage extends StatefulWidget {
   State<ProductsPage> createState() => _ProductsPageState();
 }
 
+enum sortOptions { price, name, expiryDate, none }
+
 class _ProductsPageState extends State<ProductsPage> {
+  sortOptions sortBy = sortOptions.none;
+
   Future<void> _reload() async {
     setState(() {});
   }
@@ -39,28 +43,58 @@ class _ProductsPageState extends State<ProductsPage> {
               icon: const Icon(Icons.sort),
               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                     PopupMenuItem(
+                      onTap: () {
+                        setState(() {
+                          sortBy = sortOptions.name;
+                        });
+                      },
                       child: TextButton(
                           child: const Text('Sort by name',
                               style: TextStyle(color: Colors.grey)),
-                          onPressed: () {}),
+                          onPressed: () {
+                            setState(() {
+                              print(sortBy.toString());
+                              sortBy = sortOptions.name;
+                            });
+                          }),
                     ),
                     PopupMenuItem(
+                      onTap: () {
+                        setState(() {
+                          sortBy = sortOptions.price;
+                        });
+                      },
                       child: TextButton(
                           child: const Text('Sort by price',
                               style: TextStyle(color: Colors.grey)),
-                          onPressed: () {}),
+                          onPressed: () {
+                            setState(() {
+                              print(sortBy.toString());
+                              sortBy = sortOptions.price;
+                            });
+                          }),
                     ),
                     PopupMenuItem(
+                      onTap: () {
+                        setState(() {
+                          sortBy = sortOptions.expiryDate;
+                        });
+                      },
                       child: TextButton(
-                          child: const Text('Sort by date',
+                          child: const Text('Sort by expiry date',
                               style: TextStyle(color: Colors.grey)),
-                          onPressed: () {}),
+                          onPressed: () {
+                            setState(() {
+                              print(sortBy.toString());
+                              sortBy = sortOptions.expiryDate;
+                            });
+                          }),
                     ),
                   ]),
         ],
       ),
       body: FutureBuilder(
-          future: Utils.get(widget.selected.name),
+          future: Utils.get(widget.selected.name, sortBy: sortBy),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
