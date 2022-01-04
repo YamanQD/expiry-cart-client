@@ -1,3 +1,4 @@
+import 'package:expiry_cart/Screens/search.dart';
 import 'package:expiry_cart/models/product.dart';
 import 'package:expiry_cart/Screens/details_page.dart';
 import 'package:expiry_cart/Style/constant.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 class ProductsPage extends StatelessWidget {
   final Category selected;
 
-  ProductsPage({Key key, @required this.selected}) : super(key: key);
+  const ProductsPage({Key key, @required this.selected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,13 @@ class ProductsPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
-            press: () {},
-          ),
-
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SearchView()));
+              },
+              icon: const Icon(Icons.search)),
           PopupMenuButton(
               icon: const Icon(Icons.sort),
               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
@@ -118,9 +122,11 @@ class ProductsPage extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(snapshot.data[index].expiryDate,
-                                          style: TextStyle(color: Colors.grey)),
+                                          style: const TextStyle(
+                                              color: Colors.grey)),
                                       Text(snapshot.data[index].price,
-                                          style: TextStyle(color: Colors.grey)),
+                                          style: const TextStyle(
+                                              color: Colors.grey)),
                                     ],
                                   ),
                                 ),
@@ -146,30 +152,6 @@ class ProductsPage extends StatelessWidget {
               );
             }
           }),
-    );
-  }
-}
-
-class IconButton extends StatelessWidget {
-  final Widget icon;
-  final Function press;
-  const IconButton({
-    Key key,
-    @required this.icon,
-    @required this.press,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      shape: const CircleBorder(),
-      constraints: const BoxConstraints.tightFor(
-        width: 30,
-        height: 30,
-      ),
-      fillColor: Colors.white,
-      child: icon,
-      onPressed: press,
     );
   }
 }
