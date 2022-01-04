@@ -1,4 +1,5 @@
 import 'package:expiry_cart/Screens/categories_list_page.dart';
+import 'package:expiry_cart/Screens/product_page.dart';
 import 'package:expiry_cart/categories_helper/utils.dart';
 // import 'package:expiry_cart/Screens/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,11 @@ void main() => runApp(
       MaterialApp(
         // AddProductPage(),
         // EditProductPage(),
+        // ProductsPage(selected: Utils.getCategories()[2]),
+        home: ProductsPage(selected: Utils.getCategories()[2]),
+
+            // Categories(),
+
         home: // ProductsPage(selected: Utils.getCategories()[2]),
             Categories(),
         // DetailsPage(productDetail: Utils.get()[0].subCategories[0]),

@@ -1,3 +1,4 @@
+import 'package:expiry_cart/Screens/comments.dart';
 import 'package:expiry_cart/Screens/edit_product.dart';
 import 'package:expiry_cart/models/product.dart';
 import 'package:expiry_cart/categories_helper/utils.dart';
@@ -116,6 +117,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                             ),
                                           ),
                                         ]),
+//////////////////////////////////////////////////////////////////////////////////////////////////
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           left: 12, right: 12),
