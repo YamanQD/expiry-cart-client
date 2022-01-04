@@ -1,3 +1,4 @@
+import 'package:expiry_cart/Screens/comments.dart';
 import 'package:expiry_cart/Screens/edit_product.dart';
 import 'package:expiry_cart/models/product.dart';
 import 'package:expiry_cart/Style/constant.dart';
@@ -210,7 +211,11 @@ class _DetailsPageState extends State<DetailsPage> {
                                     text: 'Comment',
                                     color: kGreenColor,
                                     press: () {
-                                      
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Comments(title: '')));
                                     }),
                                 DetailsColumn(
                                     icon: Icons.delete,
