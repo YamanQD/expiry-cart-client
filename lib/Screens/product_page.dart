@@ -18,27 +18,68 @@ enum sortOptions { price, name, expiryDate, none }
 
 class _ProductsPageState extends State<ProductsPage> {
   sortOptions sortBy = sortOptions.none;
+  final searchTermController = TextEditingController();
+  bool isSearching = false;
 
   Future<void> _reload() async {
-    setState(() {});
+    setState(() {
+      sortBy = sortOptions.none;
+    });
+  }
+
+  @override
+  void dispose() {
+    searchTermController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.selected.name + ' ' + 'Category',
-          style: kAppBarText,
-        ),
+        title: Builder(builder: (context) {
+          if (!isSearching) {
+            return Text(
+              widget.selected.name + ' ' + 'Category',
+              style: kAppBarText,
+            );
+          } else {
+            return TextField(
+              controller: searchTermController,
+              decoration: const InputDecoration(
+                hintText: 'Search',
+                border: InputBorder.none,
+              ),
+              onChanged: (value) {
+                setState(() {});
+              },
+            );
+          }
+        }),
         iconTheme: const IconThemeData(
           color: kGreenColor,
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            press: () {},
-          ),
+          Builder(builder: (context) {
+            if (!isSearching) {
+              return IconButton(
+                  press: () {
+                    setState(() {
+                      isSearching = true;
+                    });
+                  },
+                  icon: const Icon(Icons.search));
+            } else {
+              return IconButton(
+                  icon: const Icon(Icons.cancel),
+                  press: () {
+                    setState(() {
+                      isSearching = false;
+                      searchTermController.clear();
+                    });
+                  });
+            }
+          }),
           PopupMenuButton(
               icon: const Icon(Icons.sort),
               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
@@ -94,7 +135,11 @@ class _ProductsPageState extends State<ProductsPage> {
         ],
       ),
       body: FutureBuilder(
-          future: Utils.get(widget.selected.name, sortBy: sortBy),
+          future: Utils.get(
+            widget.selected.name,
+            sortBy: sortBy,
+            searchTerm: searchTermController.text,
+          ),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
