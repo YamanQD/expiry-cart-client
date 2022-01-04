@@ -1,6 +1,7 @@
 import 'package:expiry_cart/Screens/comments.dart';
 import 'package:expiry_cart/Screens/edit_product.dart';
 import 'package:expiry_cart/models/product.dart';
+import 'package:expiry_cart/categories_helper/utils.dart';
 import 'package:expiry_cart/Style/constant.dart';
 import 'package:expiry_cart/Style/d_container.dart';
 import 'package:expiry_cart/Style/details_column.dart';
@@ -9,10 +10,10 @@ import 'package:expiry_cart/Style/icon_press.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
-  Future<Product> productDetail;
+  int productId;
   DetailsPage({
     Key key,
-    @required this.productDetail,
+    @required this.productId,
   }) : super(key: key);
 
   @override
@@ -33,10 +34,11 @@ class _DetailsPageState extends State<DetailsPage> {
       body: Container(
         alignment: Alignment.center,
         child: FutureBuilder(
-            future: widget.productDetail,
+            future: Utils.getProduct(widget.productId),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
+                  userVote = int.parse(snapshot.data.userVote);
                   return Column(children: [
                     ClipRRect(
                         borderRadius: const BorderRadius.only(
@@ -46,6 +48,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           Container(
                             height: 175,
                             decoration: BoxDecoration(
+                              color: Colors.white,
                               image: DecorationImage(
                                 image: NetworkImage(
                                     'http://yaman.muhajreen.net:8000/images/products/${snapshot.data.image}'),
@@ -130,30 +133,51 @@ class _DetailsPageState extends State<DetailsPage> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  IconPress(
-                                                    icon: Icons.arrow_upward,
-                                                    press: () {
-                                                      setState(() {
-                                                        userVote++;
-                                                      });
-                                                    },
-                                                    color: kGreenColor,
-                                                  ),
+                                                  Builder(builder: (context) {
+                                                    var color = userVote == 1
+                                                        ? kGreenColor
+                                                        : Colors.grey;
+
+                                                    return IconPress(
+                                                      icon: Icons.arrow_upward,
+                                                      press: () async {
+                                                        if (await Utils.vote(
+                                                            snapshot.data.id,
+                                                            'up')) {
+                                                          setState(() {
+                                                            userVote = 1;
+                                                          });
+                                                        }
+                                                      },
+                                                      color: color,
+                                                    );
+                                                  }),
                                                   Text(
                                                     snapshot.data.votes,
                                                     style: const TextStyle(
                                                       fontSize: 17,
                                                     ),
                                                   ),
-                                                  IconPress(
-                                                    icon: Icons.arrow_downward,
-                                                    press: () {
-                                                      setState(() {
-                                                        userVote--;
-                                                      });
-                                                    },
-                                                    color: Colors.red,
-                                                  ),
+                                                  Builder(builder: (context) {
+                                                    var color = userVote == -1
+                                                        ? Colors.red
+                                                        : Colors.grey;
+
+                                                    return IconPress(
+                                                      icon:
+                                                          Icons.arrow_downward,
+                                                      press: () async {
+                                                        if (await Utils.vote(
+                                                            snapshot.data.id,
+                                                            'down')) {
+                                                          setState(() {
+                                                            userVote = -1;
+                                                          });
+                                                        }
+                                                      },
+                                                      color: color,
+                                                    );
+                                                  }),
                                                 ]),
                                           ),
                                         ]),
@@ -183,7 +207,9 @@ class _DetailsPageState extends State<DetailsPage> {
                           D_Container(
                               text: 'Description:',
                               icon: Icons.short_text_rounded,
-                              text1: snapshot.data.description),
+                              text1: snapshot.data.description == 'null'
+                                  ? 'No description'
+                                  : snapshot.data.description),
                           const SizedBox(height: 20),
                           Container(
                             margin: const EdgeInsets.all(20),

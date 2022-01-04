@@ -13,6 +13,9 @@ void main() => runApp(
         home: ProductsPage(selected: Utils.getCategories()[2]),
 
             // Categories(),
+
+        home: // ProductsPage(selected: Utils.getCategories()[2]),
+            Categories(),
         // DetailsPage(productDetail: Utils.get()[0].subCategories[0]),
         //  DetailsPage(productDetail: Utils.get()[0].subCategories[0]),
         // SplashPage(

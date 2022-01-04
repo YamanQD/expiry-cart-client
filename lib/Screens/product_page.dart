@@ -26,6 +26,7 @@ class ProductsPage extends StatelessWidget {
             icon: const Icon(Icons.search),
             press: () {},
           ),
+
           PopupMenuButton(
               icon: const Icon(Icons.sort),
               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
@@ -68,8 +69,7 @@ class ProductsPage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => DetailsPage(
-                                  productDetail:
-                                      Utils.getProduct(snapshot.data[index].id),
+                                  productId: snapshot.data[index].id,
                                 ),
                               ),
                             );
