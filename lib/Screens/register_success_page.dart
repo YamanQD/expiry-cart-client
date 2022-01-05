@@ -41,7 +41,7 @@ class RegisterSuccessPage extends StatelessWidget {
             height: 40,
           ),
           TextButtonStyle(
-            text: 'Get Started',
+            text: 'Sign In',
             press: () {
               Navigator.pushAndRemoveUntil(
                   context,
