@@ -4,6 +4,7 @@ import 'package:expiry_cart/Screens/welcome_page.dart';
 
 void main() => runApp(
       MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: SplashPage(
           duration: 5,
           navigateToPage: const WelcomePage(),
