@@ -202,7 +202,6 @@ class _ProductsPageState extends State<ProductsPage> {
                                     snapshot.data[index].name,
                                     style: kProductName,
                                   ),
-                                  // const SizedBox(height: 10),
                                   Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: Row(
