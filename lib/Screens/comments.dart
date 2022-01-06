@@ -52,20 +52,6 @@ class _CommentsState extends State<Comments> {
   }
 
   Widget createComment({owner, comment}) {
-    // return  Row(
-    //   children: [
-    //
-    //     Container(
-    //      padding : const EdgeInsets.all(20.0),
-    //      child :    Text('$owner : ' , style: TextStyle(fontSize: 15))
-    //     ),
-    //    Container(
-    //      color: Color(0xff77b234),
-    //        padding :const EdgeInsets.all(20.0),
-    //      child : Text('$comment' , style: TextStyle(fontSize: 20)),
-    //        ),
-    //   ],
-    // );
     return Container(
       child: Row(
         children: [
